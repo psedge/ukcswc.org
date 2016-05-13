@@ -5,33 +5,53 @@ html, body {
   background: #5F9EA0;
   text-align: center;
 }
-//
-//nav, title {
-//  display: block;
-//  width: 100%;
-//}
-//
-//nav {
-//  padding: 25px;
-//
-//  ul {
-//    float: right;
-//    li {
-//      display: block;
-//      padding: 5px;
-//      font-weight: bold;
-//      color: #22383a;
-//      float: left;
-//    }
-//  }
-//}
-//
-//title {
-//  padding: 50px;
-//  font-size: 26pt;
-//  background-color: ghostwhite;
-//  line-height: 0.4;
-//  font-weight: bold;
-//  letter-spacing: -1px;
-//}
 
+div {
+  padding: 10px;
+}
+
+div.container {
+  background-color: rgba(255,255,255,0.7);
+  border: 1px solid white;
+  margin: 25px auto;
+}
+
+div.next-event {
+  display: block;
+  height: 75px;
+
+  span.title {
+    float: left;
+    display: block;
+  }
+
+  span.date {
+    display: block;
+    float: right;
+  }
+
+  button {
+    display: block;
+    float: right;
+    padding: 5px 15px
+  }
+
+  * {
+    padding: 10px;
+    margin: 10px;
+  }
+}
+
+div.advert-link {
+  display: block;
+  padding: 25px 0;
+  background-color: rgba(255,255,255,0.9);
+  text-decoration: none;
+  color: #3a3a3a;
+  margin: 20px;
+}
+
+div.advert-link:hover {
+  background-color: #3a3a3a;
+  color: white;
+}

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link type="text/css" rel="stylesheet" href="/static/css/bootstrap.css"/>
+    <link type="text/css" rel="stylesheet" href="/static/css/main.css"/>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+
+<div class="container">
+    <h1>UKC Sailing and Windsurfing</h1>
+
+    <div class="row">
+        <div class="col-xs-12">
+            {% for date in date_list %}
+                {{ date }}
+            {% endfor %}
+
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            <nav class="pull-right">
+                <ul>
+                    <li>About</li>
+                    <li>Volunteer</li>
+                    <li>Login</li>
+                    <li>Contact</li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
