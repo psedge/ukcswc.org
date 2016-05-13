@@ -1,0 +1,24 @@
+# UKC Git Ignore
+
+# Jetbrains Standard
+.idea
+.idea/*
+
+# Personal Details
+settings.py
+
+# Production filetypes
+*.log
+*.pot
+*.pyc
+
+# Compiled Assets
+static/
+static/*
+
+# Local Database
+db.sqlite3
+
+# Local Node Stuff
+node_modules/
+node_modules/*
