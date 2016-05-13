@@ -1,9 +1,10 @@
+
+
 html, body {
   margin: 0;
   padding: 0;
-  font-family: "Open Sans", sans-serif;
-  background: #5F9EA0;
-  text-align: center;
+  font-family: "Neuzeit","Helvetica Neue",Helvetica,Arial,sans-serif;
+  background: white;
 }
 
 div {
@@ -12,13 +13,19 @@ div {
 
 div.container {
   background-color: rgba(255,255,255,0.7);
-  border: 1px solid white;
+  border-left: 10px solid #152E47;
   margin: 25px auto;
+
+}
+
+.fucking-say-it {
+  letter-spacing: -2px;
+  font-weight: bold;
 }
 
 div.next-event {
   display: block;
-  height: 75px;
+  height: 50px;
 
   span.title {
     float: left;
@@ -33,25 +40,25 @@ div.next-event {
   button {
     display: block;
     float: right;
-    padding: 5px 15px
+    padding: 5px 15px;
+    margin-left: 20px;
   }
 
-  * {
-    padding: 10px;
-    margin: 10px;
-  }
 }
 
 div.advert-link {
   display: block;
   padding: 25px 0;
-  background-color: rgba(255,255,255,0.9);
+  background-color: #152E47;
   text-decoration: none;
-  color: #3a3a3a;
+  text-align:center;
+  color: white;
   margin: 20px;
+  border: 3px solid white;
 }
 
 div.advert-link:hover {
-  background-color: #3a3a3a;
-  color: white;
+  background-color: white;
+  border: 3px solid #152E47;
+  color: #152E47;
 }
