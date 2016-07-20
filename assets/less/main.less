@@ -5,6 +5,7 @@ html, body {
   padding: 0;
   font-family: "Neuzeit","Helvetica Neue",Helvetica,Arial,sans-serif;
   background: white;
+  letter-spacing: 0.95px;
 }
 
 div {
@@ -13,15 +14,57 @@ div {
 
 div.container {
   background-color: rgba(255,255,255,0.7);
-  border-left: 10px solid #152E47;
   margin: 25px auto;
+
+  section {
+    border-left: 10px solid #152E47;
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 10px;
+    margin-bottom: 20px;
+
+    article {
+      position: relative;
+
+      img {
+        max-width: 100%;
+      }
+
+      div.overlay {
+        position: absolute;
+        display: block;
+        background-color: rgba(255, 255, 255, 0.6);
+        top: 15px;
+        left: 0;
+        padding: 5px 25px 25px 10px;
+
+        h2 {
+          margin-bottom: 5px;
+        }
+
+        span.date {
+          font-size: 11pt;
+          margin-left: 20px;
+        }
+      }
+
+      p:first-of-type {
+        margin-top: 15px;
+      }
+
+      p {
+        position: relative;
+        padding: 0 5px;
+      }
+    }
+  }
 
 }
 
-.fucking-say-it {
+.bold {
   letter-spacing: -2px;
   font-weight: bold;
 }
+
 
 div.next-event {
   display: block;
