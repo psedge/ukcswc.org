@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link type="text/css" rel="stylesheet" href="/static/css/bootstrap.css"/>
+    <link type="text/css" rel="stylesheet" href="/static/css/main.css"/>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+
+<div class="container">
+
+    {% include "partials/header.html" %}
+
+    <div class="row">
+        <div class="col-xs-12 col-md-9">
+
+            {% block content %}{% endblock %}
+
+        </div>
+
+        <div class="col-xs-12 col-md-3">
+            <a href="/book">
+                <div class="advert-link col-xs-10 pull-right">
+                    <h2 class="bold">Book a Session</h2>
+                </div>
+            </a>
+            <a href="/reportkit">
+                <div class="advert-link col-xs-10 pull-right">
+                    <h2 class="bold">Report Missing Kit</h2>
+                </div>
+            </a>
+            <a href="/feedback">
+                <div class="advert-link col-xs-10 pull-right">
+                    <h2 class="bold">Give Feedback</h2>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+
+{% include "partials/footer.html" %}
+
+</body>
+</html>

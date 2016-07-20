@@ -6,8 +6,13 @@ import time
 class Date(models.Model):
     date = models.DateField("Date")
 
+    def get_times(self):
+        return Time.objects.iterator()
+
+
     def __str__(self):
         return str(self.date)
+
 
 class Time(models.Model):
     time = models.TimeField("Time")

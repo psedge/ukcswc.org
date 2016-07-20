@@ -1,0 +1,58 @@
+{% extends "noside.html" %}
+
+{% block content %}
+
+    <section>
+        <h3 class="bolder">Sessions available</h3>
+    </section>
+
+    {% for date in date_list %}
+        <section>
+            <div class="row">
+                <div class="col-xs-12">
+                    <article class="session">
+                        <span class="date bolder">{{ date.date|date:"D jS N" }}</span>
+
+                        <div id="times">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                    <th></th>
+                                        {% for time in date.get_times %}
+                                            <th>{{ time }}</th>
+                                        {% endfor %}
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                    <td>Sailing</td>
+                                        {% for time in date.get_times %}
+                                            <td>
+                                                <button type="button" class="btn btn-success">6 places left</button>
+                                            </td>
+                                        {% endfor %}
+                                    </tr>
+                                    <td>Windsurfing</td>
+                                        {% for time in date.get_times %}
+                                            <td>
+                                                <button type="button" class="btn btn-success">6 places left</button>
+                                            </td>
+                                        {% endfor %}
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+    {% endfor %}
+
+    <section>
+        <article>
+            More dates to be announced shortly.
+        </article>
+    </section>
+
+{% endblock %}

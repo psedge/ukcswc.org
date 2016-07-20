@@ -1,0 +1,34 @@
+div.footer {
+  margin-top: -60px !important;
+
+  nav {
+    display: inline-block;
+
+    ul {
+      display: block;
+      margin: 0 auto;
+
+      li {
+        list-style: none;
+        float: left;
+        font-weight: bold;
+        display: inline-block;
+        margin: 0 10px;
+        padding: 10px;
+
+        &:after {
+          position: relative;
+          content: "|";
+          margin-left: 20px;
+        }
+
+        &:last-child {
+          &:after {
+            display: none;
+          }
+        }
+      }
+
+    }
+  }
+}

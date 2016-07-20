@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link type="text/css" rel="stylesheet" href="/static/css/bootstrap.css"/>
+    <link type="text/css" rel="stylesheet" href="/static/css/main.css"/>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+
+<div class="container">
+    {% include "partials/header.html" %}
+
+    <div class="row">
+        <div class="col-xs-12">
+
+            {% block content %}{% endblock %}
+
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
