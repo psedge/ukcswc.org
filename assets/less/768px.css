@@ -1,0 +1,27 @@
+@media (min-width: 768px) {
+  a#home {
+    text-align: left;
+    margin-bottom: 20px;
+    display: inline-block;
+  }
+  a#home img {
+    float: left !important;
+  }
+  a#home h1 {
+    float: left !important;
+    clear: none;
+  }
+  div.container div.sidebar {
+    margin-top: -10px;
+  }
+  div.container section article div.overlay {
+    top: 15px;
+  }
+  div.container section article div.overlay h2 {
+    font-size: 24pt;
+  }
+  div.container div.row div.advert-link {
+    margin: 10px 10px;
+    float: right;
+  }
+}
