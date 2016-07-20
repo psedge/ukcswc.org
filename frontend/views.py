@@ -16,7 +16,7 @@ class BookView(ListView):
     def get_queryset(self):
         return Date.objects.order_by('date')
 
-class Times(ListView):
+class TimesView(ListView):
 
     def get_queryset(self):
         return Time.objects.order_by('time')

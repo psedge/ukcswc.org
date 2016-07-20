@@ -14,31 +14,26 @@
                         <span class="date bolder">{{ date.date|date:"D jS N" }}</span>
 
                         <div id="times">
-                            <table class="table table-bordered">
+                            <table class="table table-responsive">
                                 <thead>
                                     <tr>
-                                    <th></th>
-                                        {% for time in date.get_times %}
-                                            <th>{{ time }}</th>
-                                        {% endfor %}
+                                        <th></th>
+                                        <th>Sailing</th>
+                                        <th>Windsurfing</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                    <td>Sailing</td>
-                                        {% for time in date.get_times %}
+                                    {% for time in date.get_times %}
+                                        <tr>
+                                            <td>{{ time }}</td>
                                             <td>
                                                 <button type="button" class="btn btn-success">6 places left</button>
                                             </td>
-                                        {% endfor %}
-                                    </tr>
-                                    <td>Windsurfing</td>
-                                        {% for time in date.get_times %}
                                             <td>
                                                 <button type="button" class="btn btn-success">6 places left</button>
                                             </td>
-                                        {% endfor %}
-                                    </tr>
+                                        </tr>
+                                    {% endfor %}
                                 </tbody>
                             </table>
 

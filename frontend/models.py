@@ -7,8 +7,7 @@ class Date(models.Model):
     date = models.DateField("Date")
 
     def get_times(self):
-        return Time.objects.iterator()
-
+        return Time.objects.order_by('time').iterator()
 
     def __str__(self):
         return str(self.date)
@@ -31,4 +30,8 @@ class UserSession(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     date = models.ForeignKey(Date, on_delete=models.CASCADE)
     time = models.ForeignKey(Time, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.user.name + " - " + self.date.date.strftime("%a %d/%m/%y") + " - " + str(self.time)
+
 
