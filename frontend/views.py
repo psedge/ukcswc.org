@@ -1,9 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Date, Time
-
-# Create your views here.
-from django.views.generic import ListView
+from .forms import SessionForm, KitForm
+from django.views.generic import ListView, FormView
 
 
 def index(req):
@@ -16,7 +15,21 @@ class BookView(ListView):
     def get_queryset(self):
         return Date.objects.order_by('date')
 
-class TimesView(ListView):
+class BookingView(FormView):
+    template_name = 'pages/booking.html'
+    form_class = SessionForm
+    success_url = '/booked/'
 
-    def get_queryset(self):
-        return Time.objects.order_by('time')
+    def form_valid(self, form):
+        form.valid()
+        return super(BookingView, self).form_valid(form)
+
+class KitForm(FormView):
+    template_name = 'pages/kitform.html'
+    form_class = KitForm
+    success_url = '/booked/'
+
+    def form_valid(self, form):
+        form.valid()
+        return super(KitForm, self).form_valid(form)
+
