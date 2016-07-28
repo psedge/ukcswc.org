@@ -1,0 +1,26 @@
+{% extends "noside.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+    <section>
+        <h3 class="bolder">Booking a session</h3>
+    </section>
+
+    <section id="back">
+        <a href="/sessions">
+            <h5>Back</h5>
+        </a>
+    </section>
+
+    <section>
+        <article>
+            <form method="post">
+                {% csrf_token %}
+
+                {% crispy form %}
+        </article>
+    </section>
+
+{% endblock %}

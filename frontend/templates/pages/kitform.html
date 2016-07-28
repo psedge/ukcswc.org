@@ -1,0 +1,26 @@
+{% extends "noside.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+    <section>
+        <h3 class="bolder">Report Missing Kit</h3>
+    </section>
+
+    <section id="back">
+        <a href="home">
+            <h5>Back</h5>
+        </a>
+    </section>
+
+    <section>
+        <article>
+            <form method="post">
+                {% csrf_token %}
+
+                {% crispy form %}
+        </article>
+    </section>
+
+{% endblock %}
