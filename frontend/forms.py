@@ -71,6 +71,25 @@ class KitForm(forms.Form):
         )
     )
 
+class FeedbackForm(forms.Form):
+
+    def is_valid(self):
+        return True
+
+    feedback = forms.CharField(
+        widget= forms.Textarea()
+    )
+
+    helper = FormHelper()
+    helper.form_class = 'form-horizontal'
+    helper.layout = Layout(
+        Field('feedback',  css_class='form-control input-xlarge'),
+
+        FormActions(
+            Submit('Submit', 'Submit', css_class="btn-default"),
+        )
+    )
+
 
 
 

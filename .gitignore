@@ -15,6 +15,7 @@ settings.py
 # Compiled Assets
 static/
 static/*
+*.css
 
 # Local Database
 db.sqlite3

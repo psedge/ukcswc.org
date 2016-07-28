@@ -1,8 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Date, Time
-from .forms import SessionForm, KitForm
+from .forms import SessionForm, KitForm, FeedbackForm
 from django.views.generic import ListView, FormView
+
 
 
 def index(req):
@@ -27,7 +28,16 @@ class BookingView(FormView):
 class KitForm(FormView):
     template_name = 'pages/kitform.html'
     form_class = KitForm
-    success_url = '/booked/'
+    success_url = '/thanks/'
+
+    def form_valid(self, form):
+        form.valid()
+        return super(KitForm, self).form_valid(form)
+
+class FeedbackForm(FormView):
+    template_name = 'pages/feedback.html'
+    form_class = FeedbackForm
+    success_url = '/thanks/'
 
     def form_valid(self, form):
         form.valid()
