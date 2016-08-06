@@ -4,20 +4,45 @@
 
 
   input {
-    padding: 5px;
+    padding: 15px;
     border-radius: 2px;
   }
 }
 
 div.controls {
-  label {
-    clear: both;
+  label.checkbox {
     display: block;
+    padding: 25px;
+    border: 2px solid #fafafa;
 
-    input.radio {
+    &:hover {
+      background-color: rgba(230, 230, 230, 0.2);
+    }
+
+    &:checked {
+      background-color: rgba(123, 170, 33, 0.47);
+    }
+
+    input {
+      box-sizing: border-box;
       width: 15px;
       height: 15px;
       margin: 5px;
+      padding: 15px 0;
+      display: block;
+      position: relative;
+      float: left;
+    }
+
+    input[type="checkbox"] {
+      width: 25px;
+      display: block;
+    }
+
+    input[type="checkbox"]:checked {
+      width: 25px;
+      background-color: #0000cc;
+      display: block;
     }
   }
 }

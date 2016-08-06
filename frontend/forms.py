@@ -26,12 +26,9 @@ class SessionForm(forms.Form):
     helper.form_class = 'form-horizontal'
     helper.layout = Layout(
         Field('name', css_class='form-control input-xlarge'),
-        Field('activity', css_class='form-control checkbox input-xlarge'),
-        Field('date', css_class='form-control input-xlarge'),
-        Field('time', css_class='form-control input-xlarge'),
+        Field('activity', css_class='checkbox input-xlarge'),
         FormActions(
             Submit('save_changes', 'Confirm booking', css_class="btn-success"),
-            Submit('cancel', 'Cancel'),
         )
     )
 

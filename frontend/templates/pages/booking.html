@@ -4,22 +4,25 @@
 
 {% block content %}
 
+    {{ t }}
+
     <section>
         <h3 class="bolder">Booking a session</h3>
-    </section>
 
-    <section id="back">
-        <a href="/sessions">
-            <h5>Back</h5>
-        </a>
+        <section id="back">
+            <a href="/sessions">
+                <h5>Back</h5>
+            </a>
+        </section>
+
     </section>
 
     <section>
         <article>
             <form method="post">
                 {% csrf_token %}
-
                 {% crispy form %}
+            </form>
         </article>
     </section>
 

@@ -4,8 +4,6 @@ from .models import Date, Time
 from .forms import SessionForm, KitForm, FeedbackForm
 from django.views.generic import ListView, FormView
 
-
-
 def index(req):
     return render(req, 'pages/index.html', {})
 
@@ -20,6 +18,9 @@ class BookingView(FormView):
     template_name = 'pages/booking.html'
     form_class = SessionForm
     success_url = '/booked/'
+
+    def get(self, request, *args, **kwargs):
+        return self.as_view()
 
     def form_valid(self, form):
         form.valid()
