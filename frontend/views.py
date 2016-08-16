@@ -1,14 +1,20 @@
 from django.shortcuts import render
-from django.http import HttpResponse
 from .models import Date, Time
 from .forms import SessionForm, KitForm, FeedbackForm
-from django.views.generic import ListView, FormView
+from django.views.generic import ListView, FormView, DetailView
+from django.http import HttpResponseRedirect
 
 def index(req):
-    return render(req, 'pages/index.html', {})
+    date = Date.objects.order_by('date').first()
+    time = Time.objects.order_by('time').first()
+
+    return render(req, 'pages/index.html', {
+        'd': date,
+        't': time
+    })
 
 class BookView(ListView):
-    template_name = 'pages/book.html'
+    template_name = 'pages/sessions.html'
     context_object_name = 'date_list'
 
     def get_queryset(self):
@@ -19,8 +25,17 @@ class BookingView(FormView):
     form_class = SessionForm
     success_url = '/booked/'
 
-    def get(self, request, *args, **kwargs):
-        return self.as_view()
+    def get(self, context, **response_kwargs):
+        date = Date.objects.get(date=response_kwargs['d'])
+        time = Time.objects.get(time=response_kwargs['t'])
+        if not date or not time:
+            return HttpResponseRedirect('/sessions')
+
+        return render(self.request, self.template_name, {
+            'form': self.form_class,
+            'date': date.toHuman(),
+            'time': time
+        })
 
     def form_valid(self, form):
         form.valid()
@@ -44,3 +59,8 @@ class FeedbackForm(FormView):
         form.valid()
         return super(KitForm, self).form_valid(form)
 
+class SuccessView(DetailView):
+
+    def get(self, *context, **kwargs):
+
+        return render(self.request, 'pages/success.html')

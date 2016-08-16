@@ -1,18 +1,14 @@
 from django import forms
-from .models import Date, Time
-
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Div, Submit, HTML, Button, Row, Field
 from crispy_forms.bootstrap import AppendedText, PrependedText, FormActions
 
 class SessionForm(forms.Form):
 
-    def is_valid(self):
-        return True
+    def valid(self):
+        return
 
     name = forms.CharField()
-    date = forms.ChoiceField(choices=Date.objects.all().values_list('date', 'date'))
-    time = forms.ChoiceField(choices=Time.objects.all().values_list('time', 'time'))
     activity = forms.MultipleChoiceField(
         choices=(
             ('sailing', "Sailing"),
@@ -34,7 +30,7 @@ class SessionForm(forms.Form):
 
 class KitForm(forms.Form):
 
-    def is_valid(self):
+    def valid(self):
         return True
 
     problem = forms.CharField(

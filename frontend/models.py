@@ -9,6 +9,9 @@ class Date(models.Model):
     def get_times(self):
         return Time.objects.order_by('time').iterator()
 
+    def toHuman(self):
+        return self.date.strftime("%a %d/%m/%y")
+
     def __str__(self):
         return str(self.date)
 
@@ -37,6 +40,6 @@ class UserSession(models.Model):
     )
 
     def __str__(self):
-        return self.user.name + " - " + self.date.date.strftime("%a %d/%m/%y") + " - " + str(self.time)
+        return self.user.name + " - " + self.date.toHuman() + " - " + str(self.time)
 
 

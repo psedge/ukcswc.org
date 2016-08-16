@@ -4,26 +4,31 @@
 
 {% block content %}
 
-    {{ t }}
-
     <section>
         <h3 class="bolder">Booking a session</h3>
 
-        <section id="back">
+        <div id="back">
             <a href="/sessions">
-                <h5>Back</h5>
+                {% include "partials/back.html" %}
             </a>
-        </section>
+        </div>
+    </section>
 
+    <section id="booking-details">
+        <div>
+            <i class="fa fa-2x fa-calendar-o"></i><span id="date">{{ date }}</span>
+        </div>
+
+        <div>
+            <i class="fa fa-2x fa-clock-o"></i><span id="time">{{ time }}</span>
+        </div>
     </section>
 
     <section>
-        <article>
-            <form method="post">
-                {% csrf_token %}
-                {% crispy form %}
-            </form>
-        </article>
+        <form method="post">
+            {% csrf_token %}
+            {% crispy form %}
+        </form>
     </section>
 
 {% endblock %}
