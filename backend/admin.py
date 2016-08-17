@@ -7,7 +7,7 @@ from forms.admin import *
 
 class UKCAdmin(admin.AdminSite):
     site_header = 'UKC Sailing and Windsurfing Administration'
-    index_template = 'admin/index.html'
+    index_template = 'admin/backend/index.html'
     app_index_template = 'admin/index.html'
 
 

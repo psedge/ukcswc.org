@@ -22,7 +22,7 @@ class KitFormAdmin(admin.ModelAdmin):
         return False
 
     def has_change_permission(self, request, obj=None):
-        return False
+        return True
 
     def has_module_permission(self, request):
         return True
