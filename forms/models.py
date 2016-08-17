@@ -1,6 +1,13 @@
 from django.db import models
 
 class Feedback(models.Model):
+    view_only = True
+
+    class Meta:
+        verbose_name = 'Feedback Submission'
+        verbose_name_plural = 'Feedback Submissions'
+
+    # Attributes
     text = models.CharField(max_length=500)
 
     def __str__(self):
@@ -8,6 +15,13 @@ class Feedback(models.Model):
 
 
 class KitForm(models.Model):
+    view_only = True
+
+    class Meta:
+        verbose_name = 'Missing / Broken Kit'
+        verbose_name_plural = 'Missing Kit Reports'
+
+    # Attributes
     problem = models.CharField(max_length=500)
     area = models.CharField(
         max_length=50,

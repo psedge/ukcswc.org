@@ -2,5 +2,8 @@ from django.apps import AppConfig
 
 
 class FormsConfig(AppConfig):
-    name = 'Form Submissions'
+    name = 'Forms'
+    label = 'Form Submissions'
+    app_label = 'Form Submissions'
 
+    super().label = 'Form Submissions'

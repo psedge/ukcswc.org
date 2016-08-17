@@ -1,8 +1,7 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import redirect
 from .models import Feedback
 from .forms import KitForm, FeedbackForm
-from django.views.generic import ListView, FormView, DetailView
-from django.http import HttpResponseRedirect
+from django.views.generic import FormView
 from django.contrib import messages
 
 

@@ -17,7 +17,7 @@ from django.conf.urls import url, include
 from backend.admin import admin_site
 
 urlpatterns = [
-    url(r'^admin/', admin_site.urls),
+    url(r'^admin', admin_site.urls),
     url(r'^', include('forms.urls')),
     url(r'^', include('tasters.urls')),
 

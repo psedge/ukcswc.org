@@ -4,7 +4,6 @@ from crispy_forms.layout import Layout, Div, Submit, HTML, Button, Row, Field
 from crispy_forms.bootstrap import AppendedText, PrependedText, FormActions
 from .validators import FeedbackValid
 
-
 class KitForm(forms.Form):
 
     def valid(self):

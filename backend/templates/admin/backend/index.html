@@ -12,7 +12,7 @@
 
 {% block content %}
 <div id="content-main">
-
+adsfadsfadsf
 {% if app_list %}
     {% for app in app_list %}
         <div class="app-{{ app.app_label }} module">
@@ -21,6 +21,8 @@
             <a href="{{ app.app_url }}" class="section" title="{% blocktrans with name=app.name %}Models in the {{ name }} application{% endblocktrans %}">{{ app.display_name }}</a>
         </caption>
         {% for model in app.models %}
+
+            {% debug model %}
             <tr class="model-{{ model.object_name|lower }}">
             {% if model.admin_url %}
                 <th scope="row"><a href="{{ model.admin_url }}">{{ model.name }}</a></th>
@@ -28,16 +30,18 @@
                 <th scope="row">{{ model.name }}</th>
             {% endif %}
 
-            {% if model.add_url %}
-                <td><a href="{{ model.add_url }}" class="addlink">{% trans 'Add' %}</a></td>
-            {% else %}
-                <td>&nbsp;</td>
-            {% endif %}
+            {% if not model.view_only %}
+                {% if model.add_url %}
+                    <td><a href="{{ model.add_url }}" class="addlink">{% trans 'Add' %}</a></td>
+                {% else %}
+                    <td>&nbsp;</td>
+                {% endif %}
 
-            {% if model.admin_url %}
-                <td><a href="{{ model.admin_url }}" class="changelink">{% trans 'Change' %}</a></td>
-            {% else %}
-                <td>&nbsp;</td>
+                {% if model.admin_url %}
+                    <td><a href="{{ model.admin_url }}" class="changelink">{% trans 'Change' %}</a></td>
+                {% else %}
+                    <td>&nbsp;</td>
+                {% endif %}
             {% endif %}
             </tr>
         {% endfor %}

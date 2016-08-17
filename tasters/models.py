@@ -28,6 +28,10 @@ class User(models.Model):
         return self.name + " - " + self.kent_id
 
 class UserSession(models.Model):
+    class Meta:
+        verbose_name = 'Taster Session'
+        verbose_name_plural = 'Taster Sessions'
+
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     date = models.ForeignKey(Date, on_delete=models.CASCADE)
     time = models.ForeignKey(Time, on_delete=models.CASCADE)
