@@ -1,8 +1,6 @@
 from django.db import models
 import time
 
-# Create your models here.
-
 class Date(models.Model):
     date = models.DateField("Date")
 
@@ -41,5 +39,4 @@ class UserSession(models.Model):
 
     def __str__(self):
         return self.user.name + " - " + self.date.toHuman() + " - " + str(self.time)
-
 

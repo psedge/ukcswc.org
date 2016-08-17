@@ -1,8 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Date, Time
-from .forms import SessionForm, KitForm, FeedbackForm
+from .forms import SessionForm
 from django.views.generic import ListView, FormView, DetailView
 from django.http import HttpResponseRedirect
+from django.contrib import messages
 
 def index(req):
     date = Date.objects.order_by('date').first()
@@ -13,12 +14,14 @@ def index(req):
         't': time
     })
 
+
 class BookView(ListView):
     template_name = 'pages/sessions.html'
     context_object_name = 'date_list'
 
     def get_queryset(self):
         return Date.objects.order_by('date')
+
 
 class BookingView(FormView):
     template_name = 'pages/booking.html'
@@ -29,7 +32,7 @@ class BookingView(FormView):
         date = Date.objects.get(date=response_kwargs['d'])
         time = Time.objects.get(time=response_kwargs['t'])
         if not date or not time:
-            return HttpResponseRedirect('/sessions')
+            return HttpResponseRedirect('/tasters')
 
         return render(self.request, self.template_name, {
             'form': self.form_class,
@@ -41,26 +44,17 @@ class BookingView(FormView):
         form.valid()
         return super(BookingView, self).form_valid(form)
 
-class KitForm(FormView):
-    template_name = 'pages/kitform.html'
-    form_class = KitForm
-    success_url = '/thanks/'
+    def post(self, *context, **kwargs):
+        return render(self.request, 'pages/index.html', {
+            'message' : 'Thanks for booking! We\'ll send you a reminder the day before.',
+        })
 
-    def form_valid(self, form):
-        form.valid()
-        return super(KitForm, self).form_valid(form)
-
-class FeedbackForm(FormView):
-    template_name = 'pages/feedback.html'
-    form_class = FeedbackForm
-    success_url = '/thanks/'
-
-    def form_valid(self, form):
-        form.valid()
-        return super(KitForm, self).form_valid(form)
-
-class SuccessView(DetailView):
-
+class Redirect(DetailView):
     def get(self, *context, **kwargs):
+        return render(self.request, 'pages/index.html')
 
-        return render(self.request, 'pages/success.html')
+class BookingSuccess(Redirect):
+    def get(self, *context, **kwargs):
+        messages.success(self.request, 'Thanks for booking! We\'ll send you a reminder the day before.')
+        return redirect('/')
+
