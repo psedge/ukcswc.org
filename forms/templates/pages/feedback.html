@@ -1,0 +1,26 @@
+{% extends "noside.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+    <section>
+        <h3 class="bolder">Give Anonymous Feedback</h3>
+
+        <div id="back">
+            <a href="/">
+                {% include "partials/back.html" %}
+            </a>
+        </div>
+    </section>
+
+    <section>
+        <article>
+            <form method="post" action="/feedback">
+                {% csrf_token %}
+
+                {% crispy form %}
+        </article>
+    </section>
+
+{% endblock %}

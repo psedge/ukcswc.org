@@ -2,20 +2,19 @@ from crispy_forms.bootstrap import FormActions
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Submit, Field
 from django import forms
-
+from .validators import BookingUserValid
 
 class SessionForm(forms.Form):
 
-    def valid(self):
-        raise Exception(self)
-
-    name = forms.CharField()
+    name = forms.CharField(
+        label='Name / Kent ID',
+        validators= [BookingUserValid]
+    )
     activity = forms.MultipleChoiceField(
         choices=(
             ('sailing', "Sailing"),
             ('windsurfing', 'Windsurfing'),
         ),
-        initial='sailing',
         widget=forms.CheckboxSelectMultiple,
     )
 
@@ -28,15 +27,4 @@ class SessionForm(forms.Form):
             Submit('save_changes', 'Confirm booking', css_class="btn-success"),
         )
     )
-
-#
-# def post(self, request, *args, **kwargs):
-#     if (self.form_valid()):
-#         Feedback(text=request.POST.get('feedback')).save()
-#
-#     return render(self.request, 'pages/index.html', {
-#         'message': 'Thanks for your feedback. We\'ll raise this with the Committee.'
-#     })
-
-
 

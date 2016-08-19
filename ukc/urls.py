@@ -15,12 +15,13 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from backend.admin import admin_site
+from backend.views import HomeRedirect
 
 urlpatterns = [
     url(r'^admin', admin_site.urls),
     url(r'^', include('forms.urls')),
     url(r'^', include('tasters.urls')),
-
+    url(r'^.*$', HomeRedirect.as_view())
 ]
 
 

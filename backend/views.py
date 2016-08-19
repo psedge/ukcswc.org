@@ -1,3 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import redirect
+from django.views.generic import DetailView
 
-# Create your views here.
+
+class HomeRedirect(DetailView):
+    def get(self, request, *args, **kwargs):
+        redirect('/')

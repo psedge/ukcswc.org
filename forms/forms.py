@@ -1,13 +1,11 @@
 from django import forms
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Div, Submit, HTML, Button, Row, Field
-from crispy_forms.bootstrap import AppendedText, PrependedText, FormActions
-from .validators import FeedbackValid
+from crispy_forms.bootstrap import FormActions
+from .validators import FeedbackValidator, KentIdValidator
+from django.core.validators import EmailValidator
 
 class KitForm(forms.Form):
-
-    def valid(self):
-        return True
 
     problem = forms.CharField(
         widget= forms.Textarea()
@@ -37,7 +35,7 @@ class FeedbackForm(forms.Form):
     feedback = forms.CharField(
         widget= forms.Textarea(),
         required= True,
-        validators=[FeedbackValid]
+        validators=[FeedbackValidator]
     )
 
     helper = FormHelper()
@@ -46,6 +44,33 @@ class FeedbackForm(forms.Form):
         Field('feedback',  css_class='form-control input-xlarge'),
 
         FormActions(
-            Submit('Submit', 'Submit', css_class="btn-default"),
+            Submit('Submit', 'Submit', css_class="btn-success"),
+        )
+    )
+
+
+class SignupForm(forms.Form):
+
+    name = forms.CharField(
+        required= True,
+        validators=[KentIdValidator]
+    )
+    kent_id = forms.CharField(required= True)
+    email = forms.EmailField(
+        required= True,
+        validators=[EmailValidator]
+    )
+    mobile = forms.IntegerField(required=False)
+
+    helper = FormHelper()
+    helper.form_class = 'form-horizontal'
+    helper.layout = Layout(
+        Field('name',  css_class='form-control input-xlarge'),
+        Field('kent_id',  css_class='form-control input-xlarge'),
+        Field('email',  type='email', css_class='form-control input-xlarge',),
+        Field('mobile', css_class='form-control input-xlarge'),
+
+        FormActions(
+            Submit('Signup', 'Signup', css_class="btn-success"),
         )
     )

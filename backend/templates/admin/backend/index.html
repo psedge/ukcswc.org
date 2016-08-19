@@ -54,33 +54,35 @@
 {% endblock %}
 
 {% block sidebar %}
-<div id="content-related">
-    <div class="module" id="recent-actions-module">
-        <h2>{% trans 'Recent Actions' %}</h2>
-        <h3>{% trans 'My Actions' %}</h3>
-            {% load log %}
-            {% get_admin_log 10 as admin_log for_user user %}
-            {% if not admin_log %}
-            <p>{% trans 'None available' %}</p>
-            {% else %}
-            <ul class="actionlist">
-            {% for entry in admin_log %}
-            <li class="{% if entry.is_addition %}addlink{% endif %}{% if entry.is_change %}changelink{% endif %}{% if entry.is_deletion %}deletelink{% endif %}">
-                {% if entry.is_deletion or not entry.get_admin_url %}
-                    {{ entry.object_repr }}
+    {% load session_helper %}
+    {% next_session as date %}
+
+        <div id="content-related">
+            <div class="module" id="next-session-module">
+                <h2>{% trans 'Next Session' %}</h2>
+
+                {% if date %}
+                    <h3>{{ date.date }} - {{ date.get_total_sessions }} booking(s)</h3>
                 {% else %}
-                    <a href="{{ entry.get_admin_url }}">{{ entry.object_repr }}</a>
+                    <h3>No upcoming dates</h3>
                 {% endif %}
-                <br/>
-                {% if entry.content_type %}
-                    <span class="mini quiet">{% filter capfirst %}{{ entry.content_type }}{% endfilter %}</span>
-                {% else %}
-                    <span class="mini quiet">{% trans 'Unknown content' %}</span>
-                {% endif %}
-            </li>
-            {% endfor %}
-            </ul>
-            {% endif %}
+
+                <ul class="spotlist">
+                {% for spot in date.get_spots %}
+                    <li>
+                        <h4>{{ spot.time }}</h4>
+                        <ul>
+                            {% if spot.sessions %}
+                                {% for session in spot.sessions %}
+                                    <li>{% get_activity session.activity %} - {{ session.user }}</li>
+                                {% endfor %}
+                            {% else %}
+                                No bookings.
+                            {% endif %}
+                        </ul>
+                    </li>
+                {% endfor %}
+                </ul>
+        </div>
     </div>
-</div>
 {% endblock %}

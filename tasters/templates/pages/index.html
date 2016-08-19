@@ -5,7 +5,7 @@
     <section>
         <div class="next-event" id="next-sailing">
             <span class="title">Next Session: </span>
-            <span class="date ">September 18th</span>
+            <span class="date ">{{ d.date|date:"D jS N" }}</span>
             <a href="/book/{{ d }}/{{ t }}">
                 <button type="button" class="btn btn-success">Book Now</button>
             </a>
