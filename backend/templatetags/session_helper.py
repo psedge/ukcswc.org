@@ -7,9 +7,7 @@ register = template.Library()
 @register.simple_tag
 def next_session():
     try:
-        date = Date.objects.all().filter(date__gt=datetime.date.today()).order_by('date').get()
-
-        return date
+        return Date.objects.all().filter(date__gte=datetime.date.today()).order_by('date').first()
     except:
         return False
 
