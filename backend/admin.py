@@ -4,6 +4,10 @@ from tasters.models import *
 from tasters.admin import *
 from forms.models import *
 from forms.admin import *
+from announcements.models import *
+from announcements.admin import *
+from django_markdown.admin import MarkdownModelAdmin
+
 
 class UKCAdmin(admin.AdminSite):
     site_header = 'UKC Sailing and Windsurfing Administration'
@@ -16,5 +20,7 @@ admin_site.register(UserSession, UserSessionAdmin)
 admin_site.register(User, UserAdmin)
 admin_site.register(Date, DateAdmin)
 
-admin_site.register(KitForm, KitFormAdmin)
+admin_site.register(KitReport, KitFormAdmin)
 admin_site.register(Feedback, FeedbackAdmin)
+
+admin_site.register(Announcement, AnnouncementAdmin)

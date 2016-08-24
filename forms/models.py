@@ -15,7 +15,7 @@ class Feedback(models.Model):
         return self.text
 
 
-class KitForm(models.Model):
+class KitReport(models.Model):
     view_only = True
 
     class Meta:
@@ -32,7 +32,17 @@ class KitForm(models.Model):
             ('clothing', "The problem is to do with items of clothing \n"),
         ),
     )
+
     date = models.DateTimeField(auto_now=True)
+    solved = models.BooleanField(default=False)
+#
+    def mark_as_solved(self):
+        self.solved = True
+
+    def solved(self):
+        if self.solved:
+            return 'No'
+        return 'Yes'
 
     def __str__(self):
         return self.area + " - " + self.problem

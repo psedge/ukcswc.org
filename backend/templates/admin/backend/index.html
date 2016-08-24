@@ -54,11 +54,14 @@
 {% endblock %}
 
 {% block announcement %}
-    
+    {% load announcements %}
+
+    {% get_announcements as announcements %}
 {% endblock %}
 
 {% block sidebar %}
     {% load session_helper %}
+
     {% next_session as date %}
 
         <div id="content-related">

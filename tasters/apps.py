@@ -1,6 +1,5 @@
 from django.apps import AppConfig
 
-
 class TastersConfig(AppConfig):
 
     name = 'Taster Sessions'

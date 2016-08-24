@@ -17,39 +17,38 @@
         </div>
     </section>
 
-    <section>
-        <article>
-            <img src="/static/img/windsurf.JPG" alt="Tereza windsurfing at Whitstable YC"/>
-            <div class="overlay">
-                <h2 class="bold">Taster session bookings now open</h2>
-                <span class="date">20th July 2016</span>
-            </div>
-            <p>Looking forward to coming back to Kent after summer? Or maybe you're just starting and want to get involved.<p>
-            <p>Either way, now is the perfect time to book your taster session to try out Sailing and Windsurfing at the University
-            of Kent. Booking sessions ensures we have your kit ready when you get here, and saves you waiting around! Simply
-            give us your name and email, or log in with your Kent Sports account and we'll save you a spot on the day.</p>
 
-            <p>If you're already a member and wouldn't mind helping us out by volunteering on safety and beach crew, just hit the
-            link at the bottom of this page. See you on the water!</p>
-        </article>
-    </section>
+    {% for announcement in a%}
+        <section>
+            <article>
+                <img src="/static/img/{{ announcement.image }}" alt="{{ announcement.title }}"/>
+                <div class="overlay">
+                    <h2 class="bold">{{ announcement.title }}</h2>
+                    <span class="date">{{ announcement.date }}</span>
+                </div>
 
-    <section>
-        <article>
-            <img src="/static/img/xenon-pose.jpg" alt="Bathtub antics"/>
-            <div class="overlay">
-                <h2 class="bold">Team Racing trials date coming soon!</h2>
-                <span class="date">22nd July 2016</span>
-            </div>
-            <p>As well as casual weekend sailing, why not try your hand at University Team Racing?<p>
+                {{ announcement.html }}
+            </article>
+        </section>
+    {% endfor %}
 
-            <p>The University of Kent has competed nationally for several years, and is growing rapidly. If you're an experienced
-        racer, or would just like to try out something new, please watch our Facebook and Twitter for announcements of the team
-        tryouts. Typically we train every Wednesday afternoon and hold a short theory session over drinks on Friday afternoons.
-        It's a great chance to try out a new style of racing, or hone your skills against other universities.</p>
-
-            <p>If you have any questions, or want to know more please get in touch with our Race Captain!</p>
-        </article>
-    </section>
+{##}
+{#    <section>#}
+{#        <article>#}
+{#            <img src="/static/img/xenon-pose.jpg" alt="Bathtub antics"/>#}
+{#            <div class="overlay">#}
+{#                <h2 class="bold">Team Racing trials date coming soon!</h2>#}
+{#                <span class="date">22nd July 2016</span>#}
+{#            </div>#}
+{#            <p>As well as casual weekend sailing, why not try your hand at University Team Racing?<p>#}
+{##}
+{#            <p>The University of Kent has competed nationally for several years, and is growing rapidly. If you're an experienced#}
+{#        racer, or would just like to try out something new, please watch our Facebook and Twitter for announcements of the team#}
+{#        tryouts. Typically we train every Wednesday afternoon and hold a short theory session over drinks on Friday afternoons.#}
+{#        It's a great chance to try out a new style of racing, or hone your skills against other universities.</p>#}
+{##}
+{#            <p>If you have any questions, or want to know more please get in touch with our Race Captain!</p>#}
+{#        </article>#}
+{#    </section>#}
 
 {% endblock %}

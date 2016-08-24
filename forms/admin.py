@@ -2,7 +2,8 @@ from django.contrib import admin
 
 class FeedbackAdmin(admin.ModelAdmin):
     actions = None
-    readonly_fields = ['text']
+    readonly_fields = ['text', 'date']
+    list_display = ['text', 'date']
 
     def has_add_permission(self, request):
         return False
@@ -15,8 +16,10 @@ class FeedbackAdmin(admin.ModelAdmin):
 
 
 class KitFormAdmin(admin.ModelAdmin):
-    actions = ['view']
-    readonly_fields = ['problem', 'area']
+    actions = ['mark_as_solved']
+    readonly_fields = ['problem', 'area', 'date']
+    list_display = ('solved', 'problem','area', 'date')
+    list_display_links = ['problem']
 
     def view(self):
         return

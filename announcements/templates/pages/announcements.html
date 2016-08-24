@@ -1,0 +1,32 @@
+{% extends "noside.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+    <section>
+        <h3 class="bolder">New Announcement</h3>
+
+        <div id="back">
+            <a href="/">
+                {% include "partials/back.html" %}
+            </a>
+        </div>
+    </section>
+
+    <section>
+        <article>
+            <form method="post" action="/feedback">
+
+                <textarea name="test" id="new"></textarea>
+                {% markdown_editor "#new" %}
+                {% markdown_media %}
+
+
+                {% csrf_token %}
+
+                {% crispy form %}
+        </article>
+    </section>
+
+{% endblock %}

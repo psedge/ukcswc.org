@@ -1,19 +1,24 @@
 from django.core.exceptions import ValidationError
 from django.db.models import Q
 from django.shortcuts import render, redirect
-from .models import Date, Time, UserSession, User
-from .forms import SessionForm
 from django.views.generic import ListView, FormView, DetailView
 from django.http import HttpResponseRedirect
 from django.contrib import messages
+import markdown
+
+from .models import Date, Time, UserSession, User
+from announcements.models import Announcement
+from .forms import SessionForm
 
 def index(req):
-    date = Date.objects.order_by('date').first()
-    time = Time.objects.order_by('time').first()
+    announcements = Announcement.objects.order_by('date').all()
+    for announcement in announcements:
+        announcement.html = markdown.markdown(announcement.text)
 
     return render(req, 'pages/index.html', {
-        'd': date,
-        't': time
+        'd': Date.objects.order_by('date').first(),
+        't': Time.objects.order_by('time').first(),
+        'a': announcements
     })
 
 

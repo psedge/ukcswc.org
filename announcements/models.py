@@ -1,8 +1,12 @@
 from django.db import models
-from django.forms.fields import DateField
-
+from django_markdown.models import MarkdownField
 
 class Announcement(models.Model):
-    hero_image = 'static/ukc.jpg'
-    date = DateField()
-    text = models.TextField(max_length=None)
+
+    date = models.DateField(auto_now=True)
+    title = models.CharField(max_length=40, null=False, default="Announcement Title")
+    text = MarkdownField()
+    image = models.FileField()
+
+    def __str__(self):
+        return self.title

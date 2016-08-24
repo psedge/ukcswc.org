@@ -5,12 +5,11 @@ from crispy_forms.bootstrap import FormActions
 from .validators import FeedbackValidator, KentIdValidator
 from django.core.validators import EmailValidator
 
-class KitForm(forms.Form):
+class KitReportForm(forms.Form):
 
     problem = forms.CharField(
         widget= forms.Textarea()
     )
-
     area = forms.ChoiceField(
         choices=(
             ('sailing', "The problem is to do with Sailing / Boat kit \n"),

@@ -1,5 +1,5 @@
 from django.shortcuts import redirect
-from .models import Feedback
+from .models import Feedback, KitReport
 from tasters.models import User
 from .forms import *
 from django.views.generic import FormView
@@ -8,10 +8,10 @@ from django.contrib import messages
 
 class KitFormView(FormView):
     template_name = 'pages/kitform.html'
-    form_class = KitForm
+    form_class = KitReportForm
 
     def form_valid(self, form):
-        KitForm(
+        KitReport(
             area= form.data['area'],
             problem= form.data['problem']
         ).save()
