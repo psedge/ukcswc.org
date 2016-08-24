@@ -6,7 +6,6 @@ from .forms import AnnouncementForm
 
 class AnnouncementView(FormView):
     form_class = AnnouncementForm
-    template_name = 'pages/announcement.html'
 
     def form_valid(self, form):
         raise Exception(form)

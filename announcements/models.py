@@ -1,5 +1,5 @@
 from django.db import models
-from django_markdown.models import MarkdownField
+from django_markdown.models import *
 
 class Announcement(models.Model):
 

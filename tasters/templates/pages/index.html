@@ -17,7 +17,6 @@
         </div>
     </section>
 
-
     {% for announcement in a%}
         <section>
             <article>
@@ -26,8 +25,9 @@
                     <h2 class="bold">{{ announcement.title }}</h2>
                     <span class="date">{{ announcement.date }}</span>
                 </div>
-
-                {{ announcement.html }}
+                {% autoescape off %}
+                    {{ announcement.html }}
+                {% endautoescape %}
             </article>
         </section>
     {% endfor %}

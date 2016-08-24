@@ -51,6 +51,19 @@
                     </div>
                 </div>
             </a>
+
+            <div id="tweets-container">
+                <h5><a href="//twitter.com/KentSWC" target="_blank">@KentSWC</a> Tweets</h5>
+
+                {% load twitter_tag %}
+                {% get_tweets for "@KentSWC" as tweets exclude "replies, retweets" limit 5 %}
+
+                <ul>
+                    {% for tweet in tweets %}
+                        <li class="tweets">{{ tweet.html|safe }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
         </div>
     </div>
 </div>

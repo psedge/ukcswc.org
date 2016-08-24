@@ -1,4 +1,5 @@
 @import url(footer);
+.border() { border-left: 10px solid #152E47; }
 
 html, body {
   min-width: 400px;
@@ -36,7 +37,7 @@ div.container {
   margin: 25px auto;
 
   section {
-    border-left: 10px solid #152E47;
+    .border;
     background-color: rgba(255, 255, 255, 0.7);
     padding: 0 10px;
     margin-bottom: 25px;
@@ -180,6 +181,30 @@ div.advert-link {
   h2 {
     font-size: 12pt;
     letter-spacing: -1.5px;
+  }
+}
+
+div#tweets-container {
+  margin-top: 25px;
+
+  ul {
+    list-style: none;
+    padding-left: 10px;
+    padding-top: 10px;
+
+    li.tweets {
+      font-size: 10pt;
+      display: block;
+      padding: 5px;
+      padding-right: 0;
+      width: 100%;
+      .border;
+      margin-bottom: 10px;
+
+      a {
+        font-size: 10pt;
+      }
+    }
   }
 }
 
