@@ -17,7 +17,7 @@ def index(req):
 
     return render(req, 'pages/index.html', {
         'd': Date.objects.order_by('date').first(),
-        't': Time.objects.order_by('time').first(),
+        't': Date.objects.order_by('date').first().times,
         'a': announcements
     })
 
@@ -36,7 +36,7 @@ class BookingView(FormView):
 
     def get(self, context, **response_kwargs):
         date = Date.objects.get(date=response_kwargs['d'])
-        time = Time.objects.get(time=response_kwargs['t'])
+        time = response_kwargs['t']
         self.form_class.declared_fields['activity'].initial = response_kwargs['a']
 
         if not date or not time:
@@ -52,9 +52,9 @@ class BookingView(FormView):
         user = UserSession(
             user=User.objects.all().filter(Q(name=form.data['name']) | Q(kent_id=form.data['name'])).get(),
             date=Date.objects.filter(date=self.kwargs['d']).get(),
-            time=Time.objects.filter(time=self.kwargs['t']).get(),
+            time=self.kwargs['t'],
             activity=str(form.data['activity'])[0].upper()
-        )
+        )\
 
         try:
             user.validate_unique()

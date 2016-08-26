@@ -2,12 +2,18 @@ from django import forms
 from django.db import models
 from django.forms import MultipleChoiceField
 
-
-class Time(models.Model):
-    time = models.TimeField("Time")
-
-    def __str__(self):
-        return self.time.strftime("%H:%M")
+class Time():
+    choices = (
+        ('10:30', '10:30'),
+        ('11:00', '11:00'),
+        ('11:30', '11:30'),
+        ('12:00', '12:00'),
+        ('12:30', '12:30'),
+        ('13:00', '13:00'),
+        ('13:30', '13:30'),
+        ('14:00', '14:00'),
+        ('14:30', '14:30'),
+    )
 
 
 class Date(models.Model):
@@ -15,17 +21,6 @@ class Date(models.Model):
     date = models.DateField("Date")
 
     times = models.CharField(
-        choices=(
-            ('10.30', '10:30'),
-            ('11.00', '11:00'),
-            ('11.30', '11:30'),
-            ('12.00', '12:00'),
-            ('12.30', '12:30'),
-            ('13.00', '13:00'),
-            ('13.30', '13:30'),
-            ('14.00', '14:00'),
-            ('14.30', '14:30'),
-        ),
         max_length=255
     )
 
@@ -36,7 +31,7 @@ class Date(models.Model):
         :return:
         """
         spots = []
-        for time in Time.objects.all().iterator():
+        for time in self.times.split(', '):
             spots.append(Spot(time=time, date=self))
         return spots
 
@@ -53,7 +48,7 @@ class Date(models.Model):
         ).count()
 
     def spot_times(self):
-        return "10:30, 11:00, 11:30"
+        return self.times
 
     # Magic methods
     def __str__(self):
@@ -106,7 +101,7 @@ class UserSession(models.Model):
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     date = models.ForeignKey(Date, on_delete=models.CASCADE)
-    time = models.ForeignKey(Time, on_delete=models.CASCADE)
+    time = models.CharField(max_length=5)
     activity = models.CharField(
         max_length=1,
         choices= ( ('S','Sailing'), ('W','Windsurfing')),

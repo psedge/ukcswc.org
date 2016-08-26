@@ -7,8 +7,8 @@ class MultipleCheckboxField(MultipleChoiceField):
     def validate(self, value):
         return True
 
-    def to_python(self, value):
-        return value
+    # def to_python(self, value):
+    #     return value
 
     def full_clean(self):
         return True

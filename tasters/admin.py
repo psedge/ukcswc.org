@@ -13,7 +13,6 @@ class UserSessionAdmin(ModelAdmin):
 
 class DateAdmin(ModelAdmin):
     list_display = ['date', 'spot_times', 'spots_left']
-    # change_form_template = 'pages/tasters/date/change_form.html'
     form = DateAdminForm
 
     def has_add_permission(self, request):
