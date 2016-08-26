@@ -1,5 +1,8 @@
 from django.contrib.admin import ModelAdmin
 
+from tasters.forms import DateAdminForm
+
+
 class UserSessionAdmin(ModelAdmin):
     list_display = ['id', 'user', 'activity', 'date', 'time']
     list_display_links = list_display
@@ -9,8 +12,9 @@ class UserSessionAdmin(ModelAdmin):
 
 
 class DateAdmin(ModelAdmin):
-    list_display = ['date', 'spots_left']
-    actions = None
+    list_display = ['date', 'spot_times', 'spots_left']
+    # change_form_template = 'pages/tasters/date/change_form.html'
+    form = DateAdminForm
 
     def has_add_permission(self, request):
         return True

@@ -1,8 +1,33 @@
+from django import forms
 from django.db import models
-import time
+from django.forms import MultipleChoiceField
+
+
+class Time(models.Model):
+    time = models.TimeField("Time")
+
+    def __str__(self):
+        return self.time.strftime("%H:%M")
+
 
 class Date(models.Model):
+
     date = models.DateField("Date")
+
+    times = models.CharField(
+        choices=(
+            ('10.30', '10:30'),
+            ('11.00', '11:00'),
+            ('11.30', '11:30'),
+            ('12.00', '12:00'),
+            ('12.30', '12:30'),
+            ('13.00', '13:00'),
+            ('13.30', '13:30'),
+            ('14.00', '14:00'),
+            ('14.30', '14:30'),
+        ),
+        max_length=255
+    )
 
     def get_spots(self):
         """
@@ -27,16 +52,12 @@ class Date(models.Model):
             date=self
         ).count()
 
+    def spot_times(self):
+        return "10:30, 11:00, 11:30"
+
     # Magic methods
     def __str__(self):
         return str(self.date)
-
-
-class Time(models.Model):
-    time = models.TimeField("Time")
-
-    def __str__(self):
-        return self.time.strftime("%H:%M")
 
 
 class Spot():

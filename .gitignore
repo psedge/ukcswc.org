@@ -2,7 +2,6 @@
 
 # Jetbrains Standard
 .idea
-.idea/*
 
 # Personal Details
 settings.py
@@ -14,7 +13,6 @@ settings.py
 
 # Compiled Assets
 static/
-static/*
 *.css
 
 # Local Database
@@ -22,4 +20,3 @@ db.sqlite3
 
 # Local Node Stuff
 node_modules/
-node_modules/*
