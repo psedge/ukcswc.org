@@ -4,4 +4,4 @@ from django.views.generic import DetailView
 
 class HomeRedirect(DetailView):
     def get(self, request, *args, **kwargs):
-        redirect('/')
+        return redirect('/')

@@ -4,15 +4,11 @@ from django.forms import MultipleChoiceField
 
 class Time():
     choices = (
-        ('10:30', '10:30'),
         ('11:00', '11:00'),
-        ('11:30', '11:30'),
         ('12:00', '12:00'),
-        ('12:30', '12:30'),
         ('13:00', '13:00'),
-        ('13:30', '13:30'),
         ('14:00', '14:00'),
-        ('14:30', '14:30'),
+        ('15:00', '15:00'),
     )
 
 
@@ -38,6 +34,7 @@ class Date(models.Model):
     def get_total_sessions(self):
         return UserSession.objects.all().filter(date=self).count()
 
+
     def to_human(self):
         return self.date.strftime("%a %d/%m/%y")
 
@@ -50,6 +47,9 @@ class Date(models.Model):
     def spot_times(self):
         return self.times
 
+    def get_times(self):
+        return self.times.split(', ')
+
     # Magic methods
     def __str__(self):
         return str(self.date)
@@ -58,7 +58,6 @@ class Date(models.Model):
 class Spot():
     SAILING_PLACES = 6
     WINDSURFING_PLACES = 6
-
 
     def __init__(self, date, time):
         self.date = date

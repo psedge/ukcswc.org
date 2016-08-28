@@ -1,0 +1,62 @@
+{% extends "noside.html" %}
+
+{% block content %}
+
+    <section>
+        <h3 class="bolder">{{ date.date|date:"D jS N" }} Sessions</h3>
+
+        <div id="back">
+            <a href="/">
+                {% include "partials/back.html" %}
+            </a>
+        </div>
+    </section>
+
+    <section class="session">
+        <div id="times">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Sailing</th>
+                        <th>Windsurfing</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for spot in date.get_spots %}
+                        <tr>
+                            <td>{{ spot.time }}</td>
+                            <td>
+                                <a href="/book/{{ spot.date }}/{{ spot.time }}/sailing">
+                                    <button type="button"
+                                            {% if spot.places_sailing == 0 %} disabled {% endif %}
+                                            class="btn btn-{% if spot.places_sailing > 3 %}success{% else %}warning{% endif %}">
+                                        {{ spot.places_sailing }} places
+                                    </button>
+                                </a>
+                            </td>
+                            <td>
+                                <a href="/book/{{ spot.date }}/{{ spot.time }}/windsurfing">
+                                    <button type="button"
+                                            {% if spot.places_windsurfing == 0 %} disabled {% endif %}
+                                            class="btn btn-{% if spot.places_windsurfing > 3 %}success{% else %}warning{% endif %}">
+                                        {{ spot.places_windsurfing }} places
+                                    </button>
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+        </div>
+    </section>
+
+    <section>
+        <article>
+            Or maybe book for another day?
+        </article>
+    </section>
+
+{% endblock %}

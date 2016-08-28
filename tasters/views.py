@@ -6,7 +6,7 @@ from django.http import HttpResponseRedirect
 from django.contrib import messages
 import markdown
 
-from .models import Date, Time, UserSession, User
+from .models import Date, UserSession, User
 from announcements.models import Announcement
 from .forms import SessionForm
 
@@ -15,9 +15,10 @@ def index(req):
     for announcement in announcements:
         announcement.html = markdown.markdown(announcement.text)
 
+    date = Date.objects.order_by('date').first()
+
     return render(req, 'pages/index.html', {
-        'd': Date.objects.order_by('date').first(),
-        't': Date.objects.order_by('date').first().times,
+        'd': date,
         'a': announcements
     })
 
@@ -30,22 +31,37 @@ class BookView(ListView):
         return Date.objects.order_by('date')
 
 
-class BookingView(FormView):
+class DateView(DetailView):
+    template_name = 'pages/dates.html'
+
+    def get(self, context, **response_kwargs):
+        date = Date.objects.get(date=response_kwargs['d'])
+
+        if not date:
+            return HttpResponseRedirect('/sessions')
+
+        return render(self.request, self.template_name, {
+            'date': date,
+        })
+
+
+class DateBookingView(FormView):
     template_name = 'pages/booking.html'
     form_class = SessionForm
 
     def get(self, context, **response_kwargs):
         date = Date.objects.get(date=response_kwargs['d'])
-        time = response_kwargs['t']
-        self.form_class.declared_fields['activity'].initial = response_kwargs['a']
+        self.form_class.declared_fields['activity'].initial = 'sailing'
 
-        if not date or not time:
+        if not date:
             return HttpResponseRedirect('/sessions')
+
+        # Check that time is valid for this day.
 
         return render(self.request, self.template_name, {
             'form': self.form_class,
+            'time': "11.00",
             'date': date.to_human(),
-            'time': time,
         })
 
     def form_valid(self, form):
@@ -54,7 +70,7 @@ class BookingView(FormView):
             date=Date.objects.filter(date=self.kwargs['d']).get(),
             time=self.kwargs['t'],
             activity=str(form.data['activity'])[0].upper()
-        )\
+        )
 
         try:
             user.validate_unique()
@@ -69,6 +85,44 @@ class BookingView(FormView):
     def form_invalid(self, form):
         messages.error(self.request, 'It appears you haven\'t signed up before. Please could you give us some details?')
         return redirect('/signup')
+
+class DateTimeBookingView(DateBookingView):
+
+    def get(self, context, **response_kwargs):
+        date = Date.objects.get(date=response_kwargs['d'])
+        time = response_kwargs['t'] if response_kwargs['t'] in date.get_times() else "11.00"
+
+        self.form_class.declared_fields['activity'].initial = 'sailing'
+
+        if not date:
+            return HttpResponseRedirect('/sessions')
+
+        return render(self.request, self.template_name, {
+            'form': self.form_class,
+            'date': date.to_human(),
+            'time': time
+        })
+
+
+class DateTimeActivityBookingView(DateTimeBookingView):
+
+    def get(self, context, **response_kwargs):
+        date = Date.objects.get(date=response_kwargs['d'])
+        time = response_kwargs['t'] if response_kwargs['t'] in date.get_times() else "11.00"
+        activity = response_kwargs['a']
+
+        self.form_class.declared_fields['activity'].initial = activity
+
+        if not date:
+            return HttpResponseRedirect('/sessions')
+
+        return render(self.request, self.template_name, {
+            'form': self.form_class,
+            'date': date.to_human(),
+            'time': time,
+            'activity': activity
+        })
+
 
 class Redirect(DetailView):
     def get(self, *context, **kwargs):
