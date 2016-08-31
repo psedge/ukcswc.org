@@ -144,15 +144,16 @@ class ExportView(DetailView):
         return self.render_to_response(request)
 
     def render_to_response(self, context, **response_kwargs):
-        sessions = UserSession.objects.filter(date=Date.objects.all().first()).iterator()
+        date = Date.objects.all().first()
+        sessions = UserSession.objects.filter(date=date).iterator()
 
         response = HttpResponse(content_type='text/csv')
-        response['Content-Disposition'] = 'attachment; filename="ukc-' + str(datetime.date) + '.csv"'
+        response['Content-Disposition'] = 'attachment; filename="ukc-' + str(date.date) + '.csv"'
 
         writer = csv.writer(response)
 
-        writer.writerow(['Name', 'Kent ID', 'Time', 'Activity', 'Level'])
+        writer.writerow(['Shown up', 'Name', 'Kent ID', 'Time', 'Activity',])
         for session in sessions:
-            writer.writerow([session.user.name, session.user.kent_id, session.time, session.activity, 'Eh.'])
+            writer.writerow(['', session.user.name, session.user.kent_id, session.time, session.activity])
 
         return response
