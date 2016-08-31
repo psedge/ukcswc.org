@@ -132,3 +132,27 @@ class BookingSuccess(Redirect):
     def get(self, *context, **kwargs):
         messages.success(self.request, 'Thanks for booking! We\'ll send you a reminder the day before.')
         return redirect('/')
+
+
+from django.template import loader
+import csv
+import datetime
+from django.http import HttpResponse
+
+class ExportView(DetailView):
+    def get(self, request, *args, **kwargs):
+        return self.render_to_response(request)
+
+    def render_to_response(self, context, **response_kwargs):
+        sessions = UserSession.objects.filter(date=Date.objects.all().first()).iterator()
+
+        response = HttpResponse(content_type='text/csv')
+        response['Content-Disposition'] = 'attachment; filename="ukc-' + str(datetime.date) + '.csv"'
+
+        writer = csv.writer(response)
+
+        writer.writerow(['Name', 'Kent ID', 'Time', 'Activity', 'Level'])
+        for session in sessions:
+            writer.writerow([session.user.name, session.user.kent_id, session.time, session.activity, 'Eh.'])
+
+        return response

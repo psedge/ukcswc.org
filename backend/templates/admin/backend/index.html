@@ -10,6 +10,8 @@
     {% fontawesome_stylesheet %}
 {% endblock %}
 
+{% include 'partials/htmlhead.html' %}
+
 {% block coltype %}colMS{% endblock %}
 
 {% block bodyclass %}{{ block.super }} dashboard{% endblock %}
@@ -74,7 +76,7 @@
             <div class="module" id="next-session-module">
                 <div class="row">
                     <h2>{% trans 'Next Session' %}</h2>
-                    <a class="btn btn-info pull-right" type="button" href="/next-session/export">
+                    <a class="btn btn-info pull-right" type="button" href="/next-session/export" target="_blank">
                         <i class="fa fa-bolt"></i>
                     </a>
                 </div>

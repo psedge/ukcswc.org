@@ -1,5 +1,6 @@
 from django.conf.urls import url
 
+from tasters.views import ExportView
 from . import views
 
 urlpatterns = [
@@ -19,6 +20,7 @@ urlpatterns = [
         name="Date and Time and Activity, Form"
     ),
     url(r'^sessions', views.BookView.as_view(), name="sessions"),
+    url(r'^next-session/export', ExportView.as_view()),
     url(r'^$', views.index, name='home'),
 ]
 
