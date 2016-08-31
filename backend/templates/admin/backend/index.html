@@ -1,8 +1,14 @@
 {% extends "admin/base_site.html" %}
 
 {% load i18n admin_static %}
+{% load fontawesome %}
 
-{% block extrastyle %}{{ block.super }}<link rel="stylesheet" type="text/css" href="{% static "admin/css/dashboard.css" %}" />{% endblock %}
+{% block extrastyle %}
+    {{ block.super }}
+    <link rel="stylesheet" type="text/css" href="{% static "admin/css/dashboard.css" %}" />
+    <link rel="stylesheet" type="text/css" href="{% static "css/ukcadmin.css" %}" />
+    {% fontawesome_stylesheet %}
+{% endblock %}
 
 {% block coltype %}colMS{% endblock %}
 
@@ -66,13 +72,20 @@
 
         <div id="content-related">
             <div class="module" id="next-session-module">
-                <h2>{% trans 'Next Session' %}</h2>
+                <div class="row">
+                    <h2>{% trans 'Next Session' %}</h2>
+                    <a class="btn btn-info pull-right" type="button" href="/next-session/export">
+                        <i class="fa fa-bolt"></i>
+                    </a>
+                </div>
 
-                {% if date %}
-                    <h3>{{ date.date }} - {{ date.get_total_sessions }} booking(s)\</h3>
-                {% else %}
-                    <h3>No upcoming dates</h3>
-                {% endif %}
+                <div class="row">
+                    {% if date %}
+                        <h3>{{ date.date }} - {{ date.get_total_sessions }} bookings</h3>
+                    {% else %}
+                        <h3>No upcoming dates</h3>
+                    {% endif %}
+                </div>
 
                 <ul class="spotlist">
                 {% for spot in date.get_spots %}

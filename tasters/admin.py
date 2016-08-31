@@ -1,5 +1,6 @@
 from django.contrib.admin import ModelAdmin
 
+from forms import views
 from tasters.forms import DateAdminForm
 
 
@@ -12,7 +13,7 @@ class UserSessionAdmin(ModelAdmin):
 
 
 class DateAdmin(ModelAdmin):
-    list_display = ['date', 'spot_times', 'spots_left']
+    list_display = ['date', 'spot_times', 'bookings']
     form = DateAdminForm
 
     def has_add_permission(self, request):

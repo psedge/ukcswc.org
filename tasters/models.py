@@ -39,8 +39,8 @@ class Date(models.Model):
         return self.date.strftime("%a %d/%m/%y")
 
     # Admin methods
-    def spots_left(self):
-        return Spot.SAILING_PLACES - UserSession.objects.all().filter(
+    def bookings(self):
+        return UserSession.objects.all().filter(
             date=self
         ).count()
 

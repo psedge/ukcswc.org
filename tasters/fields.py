@@ -4,6 +4,11 @@ from django.forms import MultipleChoiceField
 
 class MultipleCheckboxField(MultipleChoiceField):
 
+    def init(self, *args, **kwargs):
+        super(MultipleCheckboxField, self).__init__(self, *args, **kwargs)
+        super().widget_attrs({'checked': 'checked'})
+
+
     def validate(self, value):
         return True
 

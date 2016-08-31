@@ -18,7 +18,7 @@ class ChoiceSingleInput(ChoiceInput):
     def tag(self, attrs=None):
         attrs = attrs or self.attrs
         final_attrs = dict(attrs, type=self.input_type, name=self.name, value=self.choice_value)
-        final_attrs['checked'] = 'checked'
+
         return format_html('<input{} />', flatatt(final_attrs))
 
 class CheckboxChoiceInput(ChoiceSingleInput):
@@ -27,7 +27,8 @@ class CheckboxChoiceInput(ChoiceSingleInput):
     def __init__(self, *args, **kwargs):
         super(CheckboxChoiceInput, self).__init__(*args, **kwargs)
         self.value = set(force_text(v) for v in self.value)
-
+        if (self.choice_value in args[1]):
+            self.attrs['checked'] = True
 
 class CheckboxFieldRenderer(ChoiceFieldRenderer):
 
