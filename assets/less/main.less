@@ -1,13 +1,15 @@
 @import "common";
-
 @import url(footer);
-.border() { border-left: 10px solid #152E47; }
+
+.border() {
+  border-left: 10px solid #152E47;
+}
 
 html, body {
   min-width: 400px;
   margin: 0;
   padding: 0;
-  font-family: "Neuzeit","Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-family: "Neuzeit", "Helvetica Neue", Helvetica, Arial, sans-serif;
   background: white;
   letter-spacing: 0.95px;
 }
@@ -35,7 +37,7 @@ a#home {
 }
 
 div.container {
-  background-color: rgba(255,255,255,0.7);
+  background-color: rgba(255, 255, 255, 0.7);
   margin: 25px auto;
 
   section {
@@ -113,7 +115,7 @@ a {
   h1 {
     display: block;
     float: left;
-    margin:-45px 0 20px 60px;
+    margin: -45px 0 20px 60px;
     clear: both;
   }
 
@@ -165,7 +167,7 @@ div.advert-link {
   padding: 15px 0 10px 0;
   background-color: rgba(26, 47, 71, 0.9);
   text-decoration: none;
-  text-align:center;
+  text-align: center;
   color: white;
   margin: 0px 10px;
   border: 3px solid white;
@@ -186,25 +188,38 @@ div.advert-link {
   }
 }
 
-div#tweets-container {
-  margin-top: 25px;
+div.sidebar {
+  div#social-links {
+    text-align: center;
+    padding: 10px 0 0 37px;
 
-  ul {
-    list-style: none;
-    padding-left: 10px;
-    padding-top: 10px;
+    a {
+      display: inline-block;
+      padding: 10px;
+      margin: 0 10px;
+    }
+  }
 
-    li.tweets {
-      font-size: 10pt;
-      display: block;
-      padding: 5px;
-      padding-right: 0;
-      width: 100%;
-      .border;
-      margin-bottom: 10px;
+  div#tweets-container {
+    margin-top: 25px;
 
-      a {
+    ul {
+      list-style: none;
+      padding-left: 10px;
+      padding-top: 10px;
+
+      li.tweets {
         font-size: 10pt;
+        display: block;
+        padding: 5px;
+        padding-right: 0;
+        width: 100%;
+        .border;
+        margin-bottom: 10px;
+
+        a {
+          font-size: 10pt;
+        }
       }
     }
   }
@@ -219,7 +234,6 @@ article.session {
   }
 }
 
-
 section#booking-details {
 
   div {
@@ -233,7 +247,7 @@ section#booking-details {
 
     span {
       margin: 15px 10px 0 10px;
-      float:left;
+      float: left;
       font-size: 14pt;
     }
   }

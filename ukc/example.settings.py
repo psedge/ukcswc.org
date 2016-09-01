@@ -62,8 +62,7 @@ ROOT_URLCONF = 'ukc.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'tasters/templates')]
-        ,
+        'DIRS': [os.path.join(BASE_DIR, 'tasters/templates'), os.path.join(BASE_DIR, 'backend/templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
