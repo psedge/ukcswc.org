@@ -4,12 +4,14 @@ import datetime
 
 register = template.Library()
 
+
 @register.simple_tag
-def next_session():
+def next_session(*args):
     try:
         return Date.objects.all().filter(date__gte=datetime.date.today()).order_by('date').first()
     except:
         return False
+
 
 @register.simple_tag
 def get_activity(activity):
