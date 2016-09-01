@@ -6,14 +6,14 @@ from announcements.views import AnnouncementView
 register = template.Library()
 
 @register.simple_tag
-def get_announcements():
+def get_announcements(*args):
     try:
         return Announcement.objects.all()
     except:
         return False
 
 @register.simple_tag
-def get_announcement_form():
+def get_announcement_form(*args):
     try:
         return AnnouncementView.as_view()
     except:
