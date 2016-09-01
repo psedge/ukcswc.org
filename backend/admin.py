@@ -14,6 +14,7 @@ class UKCAdmin(admin.AdminSite):
     index_template = 'admin/backend/index.html'
 
 
+
 admin_site = UKCAdmin(name='UKC')
 
 admin_site.register(UserSession, UserSessionAdmin)

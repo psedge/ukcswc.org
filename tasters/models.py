@@ -1,6 +1,10 @@
+import datetime
+
 from django import forms
 from django.db import models
 from django.forms import MultipleChoiceField
+from django.utils.html import format_html
+
 
 class Time():
     choices = (
@@ -39,6 +43,11 @@ class Date(models.Model):
         return self.date.strftime("%a %d/%m/%y")
 
     # Admin methods
+    def passed(self):
+        if (self.date <= datetime.date.today()):
+            return format_html("<i class='fa fa-check'></i>")
+        return format_html("<i class='fa fa-close'></i>")
+
     def bookings(self):
         return UserSession.objects.all().filter(
             date=self

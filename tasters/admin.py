@@ -13,7 +13,10 @@ class UserSessionAdmin(ModelAdmin):
 
 
 class DateAdmin(ModelAdmin):
-    list_display = ['date', 'spot_times', 'bookings']
+    list_display = ['passed', 'date', 'spot_times', 'bookings']
+    list_display_links = ['date']
+
+    change_list_template = 'admin/date/change_list.html'
     form = DateAdminForm
 
     def has_add_permission(self, request):
