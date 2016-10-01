@@ -14,7 +14,7 @@ class AnnouncementAdmin(admin.ModelAdmin):
     verbose_name= 'Announcement'
 
     list_display = ('id', 'date', 'title', 'text','image')
-    list_display_links = list_display
+    list_display_links = ('title',)
 
     def has_add_permission(self, request):
         return True

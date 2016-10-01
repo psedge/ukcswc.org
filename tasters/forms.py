@@ -14,8 +14,8 @@ from .widgets import CheckboxSelectMultipleWidget
 class SessionForm(forms.Form):
 
     name = forms.CharField(
-        label='Name / Kent ID',
-        validators= [BookingUserValid]
+        label='Kent Username',
+        validators=[BookingUserValid]
     )
     activity = forms.MultipleChoiceField(
         choices=(

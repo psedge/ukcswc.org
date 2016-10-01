@@ -28,6 +28,7 @@ class FeedbackFormView(FormView):
         messages.success(self.request, 'Thanks for your feedback, we\'ll bring this up with the committee.')
         return redirect('/')
 
+
 class SignupFormView(FormView):
     template_name = 'pages/signup.html'
     form_class = SignupForm

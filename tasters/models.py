@@ -6,13 +6,21 @@ from django.forms import MultipleChoiceField
 from django.utils.html import format_html
 
 
-class Time():
+class Time:
+
     choices = (
+        ('10:00', '10:00'),
+        ('10:30', '10:30'),
         ('11:00', '11:00'),
+        ('11:30', '11:30'),
         ('12:00', '12:00'),
+        ('12:30', '12:30'),
         ('13:00', '13:00'),
+        ('13:30', '13:30'),
         ('14:00', '14:00'),
+        ('14:30', '14:30'),
         ('15:00', '15:00'),
+        ('15:30', '15:30'),
     )
 
 
@@ -38,13 +46,12 @@ class Date(models.Model):
     def get_total_sessions(self):
         return UserSession.objects.all().filter(date=self).count()
 
-
     def to_human(self):
         return self.date.strftime("%a %d/%m/%y")
 
     # Admin methods
     def passed(self):
-        if (self.date <= datetime.date.today()):
+        if self.date <= datetime.date.today():
             return format_html("<i class='fa fa-check'></i>")
         return format_html("<i class='fa fa-close'></i>")
 
@@ -59,12 +66,12 @@ class Date(models.Model):
     def get_times(self):
         return self.times.split(', ')
 
-    # Magic methods
     def __str__(self):
         return str(self.date)
 
 
-class Spot():
+class Spot:
+
     SAILING_PLACES = 6
     WINDSURFING_PLACES = 6
 
@@ -87,6 +94,7 @@ class Spot():
 
 
 class User(models.Model):
+
     name = models.CharField(max_length=50)
     kent_id = models.CharField(max_length=10)
     email = models.EmailField(max_length=100, null=True)
@@ -98,7 +106,9 @@ class User(models.Model):
     def id(self):
         return str(self.id)
 
+
 class UserSession(models.Model):
+
     class Meta:
         verbose_name = 'Taster Session'
         verbose_name_plural = 'Taster Sessions'
@@ -112,7 +122,7 @@ class UserSession(models.Model):
     time = models.CharField(max_length=5)
     activity = models.CharField(
         max_length=1,
-        choices= ( ('S','Sailing'), ('W','Windsurfing')),
+        choices=(('S', 'Sailing'), ('W', 'Windsurfing')),
         default='S'
     )
 

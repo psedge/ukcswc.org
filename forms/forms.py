@@ -29,6 +29,7 @@ class KitReportForm(forms.Form):
         )
     )
 
+
 class FeedbackForm(forms.Form):
 
     feedback = forms.CharField(
@@ -54,9 +55,9 @@ class SignupForm(forms.Form):
         required= True,
         validators=[KentIdValidator]
     )
-    kent_id = forms.CharField(required= True)
+    kent_id = forms.CharField(required=True)
     email = forms.EmailField(
-        required= True,
+        required=True,
         validators=[EmailValidator]
     )
     mobile = forms.IntegerField(required=False)

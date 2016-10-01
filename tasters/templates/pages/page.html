@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <section>
+        <h2>{{ page.title }}</h2>
+
+        <div id="content">
+            {% autoescape off %}
+                {{ page.html }}
+            {% endautoescape %}
+        </div>
+    </section>
+
+{% endblock %}
