@@ -10,11 +10,13 @@
                 <button type="button" class="btn btn-success">Book Now</button>
             </a>
         </div>
-        <div class="next-event" id="next-social">
-            <span class="title">Next Social: </span>
-            <span class="date">{{ e.date|date:"D jS N" }}</span>
-            <button type="button" class="btn btn-default invisible">Book</button>
-        </div>
+        {% if e %}
+            <div class="next-event" id="next-social">
+                <span class="title">Next Social: </span>
+                <span class="date">{{ e.date|date:"D jS N" }}</span>
+                <button type="button" class="btn btn-default invisible">Book</button>
+            </div>
+        {% endif %}
     </section>
 
     {% if p.count > 0 %}
