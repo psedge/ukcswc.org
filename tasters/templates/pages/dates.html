@@ -31,7 +31,7 @@
                                 <a href="/book/{{ spot.date }}/{{ spot.time }}/sailing">
                                     <button type="button"
                                             {% if spot.places_sailing == 0 %} disabled {% endif %}
-                                            class="btn btn-{% if spot.places_sailing > 3 %}success{% else %}warning{% endif %}">
+                                            class="btn btn-{% if spot.places_sailing > 3 %}success{% elif spot.places_sailing == 0 %}danger{% else %}warning{% endif %}">
                                         {{ spot.places_sailing }} places
                                     </button>
                                 </a>
@@ -40,7 +40,7 @@
                                 <a href="/book/{{ spot.date }}/{{ spot.time }}/windsurfing">
                                     <button type="button"
                                             {% if spot.places_windsurfing == 0 %} disabled {% endif %}
-                                            class="btn btn-{% if spot.places_windsurfing > 3 %}success{% else %}warning{% endif %}">
+                                            class="btn btn-{% if spot.places_windsurfing > 3 %}success{% elif spot.places_windsurfing == 0 %}danger{% else %}warning{% endif %}">
                                         {{ spot.places_windsurfing }} places
                                     </button>
                                 </a>
