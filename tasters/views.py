@@ -7,20 +7,26 @@ from django.shortcuts import render, redirect
 from django.views.generic import ListView, FormView, DetailView
 
 from announcements.models import Announcement
+from content.models import Page, Event
 from .forms import SessionForm
 from .models import Date, UserSession, User
 
 
 def index(req):
+    today = datetime.datetime.today()
+
+    pages = Page.objects.filter(published=True).all()
+    date = Date.objects.filter(date__gte=today).order_by('date').first()
+    event = Event.objects.filter(type='social', date__gte=today).order_by('date').first()
     announcements = Announcement.objects.order_by('date').all()
     for announcement in announcements:
         announcement.html = markdown.markdown(announcement.text)
 
-    date = Date.objects.order_by('date').first()
-
     return render(req, 'pages/index.html', {
         'd': date,
-        'a': announcements
+        'a': announcements,
+        'p': pages,
+        'e': event
     })
 
 

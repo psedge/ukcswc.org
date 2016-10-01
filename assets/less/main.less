@@ -104,7 +104,7 @@ div.container {
 }
 
 a {
-  color: rgba(23, 56, 83, 0.76);
+  color: rgba(23, 56, 83, 1);
   font-size: 14pt;
 
   img {
@@ -121,7 +121,7 @@ a {
 
   &:hover {
     text-decoration: none;
-    color: rgba(23, 56, 83, 0.50);
+    color: rgba(23, 56, 83, 0.80);
   }
 }
 
@@ -249,6 +249,22 @@ section#booking-details {
       margin: 15px 10px 0 10px;
       float: left;
       font-size: 14pt;
+    }
+  }
+}
+
+section#menu {
+  a {
+    font-size: 11pt;
+    font-weight: bold;
+
+    &:after {
+      content: ' | ';
+    }
+    &:last-of-type {
+      &:after {
+        content: '';
+      }
     }
   }
 }

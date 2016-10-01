@@ -22,7 +22,7 @@ urlpatterns = [
     url(r'^', include('forms.urls')),
     url(r'^', include('tasters.urls')),
     url(r'^', include('content.urls')),
-    url('^markdown/', include( 'django_markdown.urls')),
+    url('^markdown/', include('django_markdown.urls')),
     url(r'^.*$', HomeRedirect.as_view())
 ]
 

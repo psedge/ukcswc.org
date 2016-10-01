@@ -11,7 +11,7 @@ class PageView(DetailView):
 
     def get(self, context, **response_kwargs):
         title = str(self.kwargs['p']).replace('-', ' ')
-        page = Page.objects.filter(title=title).all()
+        page = Page.objects.filter(title__iexact=title).all()
 
         if not page.first():
             messages.error(self.request, 'Can\'t find that page!')
@@ -19,9 +19,14 @@ class PageView(DetailView):
 
         page = page.first()
 
+        if not page.published:
+            messages.error(self.request, 'Can\'t find that page!')
+            return redirect('/')
+
         page.html = markdown.markdown(page.content)
 
         return render(self.request, self.template_name, {
+            'p' : Page.objects.filter(published=True).all(),
             'page': page
         })
 

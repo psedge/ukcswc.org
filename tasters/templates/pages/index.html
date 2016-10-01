@@ -12,12 +12,22 @@
         </div>
         <div class="next-event" id="next-social">
             <span class="title">Next Social: </span>
-            <span class="date">September 27th</span>
+            <span class="date">{{ e.date|date:"D jS N" }}</span>
             <button type="button" class="btn btn-default invisible">Book</button>
         </div>
     </section>
 
-    {% for announcement in a%}
+    {% if p.count > 0 %}
+        <section id="menu">
+            {% for page in p %}
+                <a href="/{{ page.title|slugify }}">
+                    {{ page.title }}
+                </a>
+            {% endfor %}
+        </section>
+    {% endif %}
+
+    {% for announcement in a %}
         <section>
             <article>
                 <img src="/static/img/{{ announcement.image }}" alt="{{ announcement.title }}"/>

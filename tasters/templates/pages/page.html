@@ -2,8 +2,20 @@
 
 {% block content %}
 
+    {% if p.count > 0 %}
+        <section id="menu">
+            {% for page in p %}
+                <a href="/{{ page.title|slugify }}">
+                    {{ page.title }}
+                </a>
+            {% endfor %}
+        </section>
+    {% endif %}
+
     <section>
         <h2>{{ page.title }}</h2>
+
+        <br/>
 
         <div id="content">
             {% autoescape off %}
