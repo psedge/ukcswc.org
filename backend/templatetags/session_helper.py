@@ -16,4 +16,4 @@ def next_session(*args):
 
 @register.simple_tag
 def get_activity(activity):
-    return 'Sailing' if activity == 's' else 'Windsurfing'
+    return 'Sailing' if activity == 'S' else 'Windsurfing'
