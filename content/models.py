@@ -30,6 +30,7 @@ class Event(models.Model):
     type = models.CharField(max_length=20, null=False)
     date = models.DateField()
     title = models.CharField(max_length=100, null=False, default='Event Title')
+    facebook_link = models.CharField(max_length=500, null=True)
 
     def __str__(self):
         return str(self.title)

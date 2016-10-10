@@ -15,7 +15,13 @@
         {% if e %}
             <div class="next-event" id="next-social">
                 <span class="title">Next Social: </span>
-                <span class="date">{{ e.date|date:"D jS N" }}</span>
+                <span class="date">
+                    {% if e.facebook_link %}
+                        <a target="_blank" class="little-link" href="{{ e.facebook_link }}">{{ e.date|date:"D jS N" }} - {{ e.title }}</a>
+                    {% else %}
+                        {{ e.date|date:"D jS N" }} - {{ e.title }}
+                    {% endif %}
+                </span>
                 <button type="button" class="btn btn-default invisible">Book</button>
             </div>
         {% endif %}
@@ -24,7 +30,7 @@
     {% if p.count > 0 %}
         <section id="menu">
             {% for page in p %}
-                <a href="/{{ page.title|slugify }}">
+                <a class="little-link" href="/{{ page.title|slugify }}">
                     {{ page.title }}
                 </a>
             {% endfor %}

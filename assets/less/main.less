@@ -253,18 +253,16 @@ section#booking-details {
   }
 }
 
-section#menu {
-  a {
-    font-size: 11pt;
-    font-weight: bold;
+a.little-link {
+  font-size: 11pt;
+  font-weight: bold;
 
+  &:after {
+    content: ' | ';
+  }
+  &:last-of-type {
     &:after {
-      content: ' | ';
-    }
-    &:last-of-type {
-      &:after {
-        content: '';
-      }
+      content: '';
     }
   }
 }

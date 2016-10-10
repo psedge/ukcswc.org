@@ -35,12 +35,14 @@ class EventForm(forms.ModelForm):
     date = forms.DateField()
     date.widget = AdminDateWidget(attrs=None, format='%Y-%m-%d')
     title = forms.CharField(max_length=100)
+    facebook_link = forms.CharField(max_length=500, label="Facebook Link")
 
     helper = FormHelper()
     helper.form_class = 'form-horizontal'
     helper.layout = Layout(
         Field('type',  css_class='form-control radio input-xlarge'),
         Field('title',  css_class='form-control input-xlarge'),
+        Field('facebook_link',  css_class='form-control input-xlarge'),
 
         FormActions(
             Submit('Publish', 'Publish', css_class="btn-success"),
