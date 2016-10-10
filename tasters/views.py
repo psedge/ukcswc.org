@@ -35,7 +35,8 @@ class BookView(ListView):
     context_object_name = 'date_list'
 
     def get_queryset(self):
-        return Date.objects.order_by('date')
+        today = datetime.datetime.today()
+        return Date.objects.filter(date__gte=today).order_by('date')
 
 
 class DateView(DetailView):

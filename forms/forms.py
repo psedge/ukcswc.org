@@ -53,9 +53,10 @@ class SignupForm(forms.Form):
 
     name = forms.CharField(
         required= True,
-        validators=[KentIdValidator]
+        validators=[KentIdValidator],
+        label="Full Name"
     )
-    kent_id = forms.CharField(required=True)
+    kent_id = forms.CharField(required=True, label="Kent Username (eg. jwc98)")
     email = forms.EmailField(
         required=True,
         validators=[EmailValidator]
@@ -66,7 +67,7 @@ class SignupForm(forms.Form):
     helper.form_class = 'form-horizontal'
     helper.layout = Layout(
         Field('name',  css_class='form-control input-xlarge'),
-        Field('kent_id',  css_class='form-control input-xlarge'),
+        Field('kent_id',  css_class='form-control input-xlarge', name=""),
         Field('email',  type='email', css_class='form-control input-xlarge',),
         Field('mobile', css_class='form-control input-xlarge'),
 
