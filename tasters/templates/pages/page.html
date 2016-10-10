@@ -5,7 +5,7 @@
     {% if p.count > 0 %}
         <section id="menu">
             {% for page in p %}
-                <a href="/{{ page.title|slugify }}">
+                <a class="little-link" href="/{{ page.title|slugify }}">
                     {{ page.title }}
                 </a>
             {% endfor %}
