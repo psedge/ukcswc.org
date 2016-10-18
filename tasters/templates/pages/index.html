@@ -40,7 +40,7 @@
     {% for announcement in a %}
         <section>
             <article>
-                <img src="/static/img/{{ announcement.image }}" alt="{{ announcement.title }}"/>
+                <img src="/{{ announcement.image }}" alt="{{ announcement.title }}"/>
                 <div class="overlay">
                     <h2 class="bold">{{ announcement.title }}</h2>
                     <span class="date">{{ announcement.date }}</span>

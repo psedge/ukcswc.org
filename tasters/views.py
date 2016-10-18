@@ -18,7 +18,7 @@ def index(req):
     pages = Page.objects.filter(published=True).all()
     date = Date.objects.filter(date__gte=today).order_by('date').first()
     event = Event.objects.filter(type='social', date__gte=today).order_by('date').first()
-    announcements = Announcement.objects.order_by('date').all()
+    announcements = Announcement.objects.order_by('-date').all()
     for announcement in announcements:
         announcement.html = markdown.markdown(announcement.text)
 
