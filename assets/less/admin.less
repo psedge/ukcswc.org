@@ -29,3 +29,31 @@ div.row {
     padding: 5px 20px;
   }
 }
+
+input#image-clear_id {
+  float: right;
+  display: block;
+  clear: both;
+}
+
+label[for=image-clear_id] {
+  float: right !important;
+  width: 50px !important;
+}
+
+textarea {
+  width: 98%;
+  min-height: 400px;
+}
+
+label[for=id_content]:after {
+  content: "Please format in Markdown." !important;
+  position: relative;
+  font-weight: normal;
+  font-style: italic;
+  margin: 10px 10px 10px 0px;
+  right: 0;
+  display: block;
+  width: 500px;
+  height: 50px;
+}

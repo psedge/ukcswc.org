@@ -12,6 +12,12 @@
         </section>
     {% endif %}
 
+    {% if page.image %}
+        <section style="height: 200px; overflow-y: hidden">
+            <img src="{{ page.image }}" title="{{ page.title }}" style="width: 100%"></img>
+        </section>
+    {% endif %}
+
     <section>
         <h2>{{ page.title }}</h2>
 

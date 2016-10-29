@@ -13,7 +13,7 @@ class AnnouncementAdmin(admin.ModelAdmin):
     actions= None
     verbose_name= 'Announcement'
 
-    list_display = ('id', 'date', 'title', 'text','image')
+    list_display = ('id', 'date', 'title', 'text', 'image')
     list_display_links = ('title',)
 
     def has_add_permission(self, request):

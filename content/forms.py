@@ -9,19 +9,38 @@ from content.models import Event
 
 
 class PageForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        self.helper = FormHelper()
+        self.helper.form_class = 'form-horizontal'
+        self.helper.layout = Layout(
+            Field('title', css_class='form-control input-xlarge'),
+            Field('image', css_class='form-control input-xlarge'),
+            HTML("<p>Please format this in Markdown. For help, please click <a href=\"help\">here</a></p>"),
+            Field('content', css_class='form-control input-xlarge'),
+
+            FormActions(
+                Submit('Publish', 'Publish', css_class="btn-success"),
+            )
+        )
+        super(PageForm, self).__init__(*args, **kwargs)
+
     title = forms.CharField(max_length=100)
+    image = forms.FileField()
+    image.widget = forms.ClearableFileInput()
+    image.widget.clear_checkbox_label = 'Remove\n'
+    help = Button(name="help-button", value="Content must be formatted in Markdown. For help, please click here")
     content = MarkdownFormField()
 
-    helper = FormHelper()
-    helper.form_class = 'form-horizontal'
-    helper.layout = Layout(
-        Field('title',  css_class='form-control input-xlarge'),
-        Field('content',  css_class='form-control input-xlarge'),
+    def save(self, commit=True):
+        m = super(PageForm, self).save(commit=False)
 
-        FormActions(
-            Submit('Publish', 'Publish', css_class="btn-success"),
-        )
-    )
+        if 'image-clear' in self.data and self.data['image-clear'] == 'on':
+            m.image = None
+            commit = True
+
+        if commit:
+            m.save()
+        return m
 
 
 class EventForm(forms.ModelForm):

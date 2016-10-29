@@ -12,6 +12,7 @@ class Page(models.Model):
     # Attributes
     published = models.BooleanField()
     title = models.CharField(max_length=100)
+    image = models.FileField(upload_to="static/img", null=True)
     content = MarkdownField()
     created_at = models.DateTimeField(auto_now=True)
 
