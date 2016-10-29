@@ -40,7 +40,9 @@
     {% for announcement in a %}
         <section>
             <article>
-                <img src="/{{ announcement.image }}" alt="{{ announcement.title }}"/>
+                <div style="max-height: 250px; overflow-y: hidden">
+                    <img src="/{{ announcement.image }}" alt="" title="{{ announcement.title }}" style="min-height: 100px; display: block;"/>
+                </div>
                 <div class="overlay">
                     <h2 class="bold">{{ announcement.title }}</h2>
                     <span class="date">{{ announcement.date }}</span>
