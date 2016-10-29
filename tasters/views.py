@@ -193,3 +193,22 @@ class UserView(DetailView):
             'id': kwargs['u'],
             'sessions': UserSession.objects.filter(user__kent_id=kwargs['u'], date__date__gte=today),
         })
+
+
+class UnbookView(DetailView):
+    def get(self, request, *args, **kwargs):
+        messages.error(self.request, 'Something went wrong. We\'re sorry. We tried, we really did')
+        return redirect('/')
+
+    def post(self, request, *args, **kwargs):
+        try:
+            session = UserSession.objects.filter(user__kent_id=kwargs['u'], date__date=kwargs['d'], time=kwargs['t'], activity=kwargs['a']).get()
+            session.delete()
+            messages.success(self.request, 'No problem, we\'ve unbooked you from that slot!')
+            return redirect('/')
+        except UserSession.DoesNotExist:
+            messages.error(self.request, 'We couldn\'t unbook you for some reason. '
+                                         'Try contacting us via Facebook and we\'ll sort it.')
+            return redirect('/')
+
+

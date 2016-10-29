@@ -22,6 +22,7 @@ urlpatterns = [
     url(r'^sessions', views.BookView.as_view(), name="sessions"),
     url(r'^login', views.LoginView.as_view(), name="login"),
     url(r'^user/(?P<u>([a-zA-Z0-9]{1,20}))$', views.UserView.as_view(), name="user"),
+    url(r'^unbook/(?P<u>([a-zA-Z0-9]{1,20}))/(?P<d>([0-9]{4}-[0-9]{2}-[0-9]{2}))/(?P<t>([0-9]{2}:[0-9]{2}))(/(?P<a>(S|A)))$', views.UnbookView.as_view(), name="unbook"),
     url(r'^next-session/export', ExportView.as_view()),
     url(r'^$', views.index, name='home'),
 ]

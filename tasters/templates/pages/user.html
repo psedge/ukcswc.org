@@ -30,7 +30,8 @@
                     <i class="fa fa-2x fa-paper-plane"></i><span id="activity">Windsurfing</span>
                 {% endif %}
 
-                <form>
+                <form action="/unbook/{{ id }}/{{ session.date }}/{{ session.time }}/{{ session.activity }}" method="POST">
+                    {% csrf_token %}
                     <button type="submit" class="btn btn-danger btn-lg">Unbook</button>
                 </form>
             </div>
