@@ -234,10 +234,11 @@ article.session {
   }
 }
 
-section#booking-details {
+section#booking-details, section#user-booking-details {
 
   div {
     display: inline-block;
+    width: 100%;
     margin: 15px 0 0 0;
 
     i {
@@ -246,9 +247,26 @@ section#booking-details {
     }
 
     span {
-      margin: 15px 10px 0 10px;
+      margin: 7px 10px 0 10px;
       float: left;
       font-size: 14pt;
+    }
+
+    form {
+      float: right;
+      button {
+        float: right;
+      }
+    }
+  }
+}
+
+section#user-booking-details {
+  div {
+    span {
+      margin-right: 40px;
+      font-size: 16pt;
+      margin-top: 8px;
     }
   }
 }

@@ -1,0 +1,23 @@
+{% extends "noside.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+    <section>
+        <h3 class="bolder">Login</h3>
+
+        <div id="back">
+            <a href="/">
+                {% include "partials/back.html" %}
+            </a>
+        </div>
+    </section>
+
+    <section>
+        <form method="post">
+
+        {% crispy form %}
+    </section>
+
+{% endblock %}

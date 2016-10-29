@@ -20,6 +20,8 @@ urlpatterns = [
         name="Date and Time and Activity, Form"
     ),
     url(r'^sessions', views.BookView.as_view(), name="sessions"),
+    url(r'^login', views.LoginView.as_view(), name="login"),
+    url(r'^user/(?P<u>([a-zA-Z0-9]{1,20}))$', views.UserView.as_view(), name="user"),
     url(r'^next-session/export', ExportView.as_view()),
     url(r'^$', views.index, name='home'),
 ]

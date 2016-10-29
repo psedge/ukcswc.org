@@ -1,14 +1,17 @@
 import markdown
+import csv
+import datetime
+
 from django.contrib import messages
 from django.core.exceptions import ValidationError
 from django.db.models import Q
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.views.generic import ListView, FormView, DetailView
-
+from django.http import HttpResponse
 from announcements.models import Announcement
 from content.models import Page, Event
-from .forms import SessionForm
+from .forms import SessionForm, LoginForm
 from .models import Date, UserSession, User
 
 
@@ -140,18 +143,13 @@ class BookingSuccess(Redirect):
         messages.success(self.request, 'Thanks for booking! We\'ll send you a reminder the day before.')
         return redirect('/')
 
-
-from django.template import loader
-import csv
-import datetime
-from django.http import HttpResponse
-
 class ExportView(DetailView):
     def get(self, request, *args, **kwargs):
         return self.render_to_response(request)
 
     def render_to_response(self, context, **response_kwargs):
-        date = Date.objects.all().first()
+        today = datetime.datetime.today()
+        date = Date.objects.filter(date__gte=today).order_by('date').first()
         sessions = UserSession.objects.filter(date=date).iterator()
 
         response = HttpResponse(content_type='text/csv')
@@ -164,3 +162,34 @@ class ExportView(DetailView):
             writer.writerow(['', session.user.name, session.user.kent_id, session.time, session.activity])
 
         return response
+
+
+class LoginView(DetailView):
+    template_name = 'pages/login.html'
+    form_class = LoginForm
+
+    def get(self, request, *args, **kwargs):
+        return render(self.request, self.template_name, {
+            'form': self.form_class,
+        })
+
+    def post(self, request, *args, **kwargs):
+        try:
+            user = User.objects.all().filter(Q(kent_id=request.POST['name'])).get()
+            return redirect('/user/' + user.kent_id)
+
+        except User.DoesNotExist:
+            messages.error(self.request, 'Can\'t find any bookings for that Kent ID / Username.')
+            return redirect('/')
+
+
+class UserView(DetailView):
+    template_name = 'pages/user.html'
+
+    def get(self, request, *args, **kwargs):
+        today = datetime.datetime.today()
+
+        return render(self.request, self.template_name, {
+            'id': kwargs['u'],
+            'sessions': UserSession.objects.filter(user__kent_id=kwargs['u'], date__date__gte=today),
+        })

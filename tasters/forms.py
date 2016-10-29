@@ -8,8 +8,9 @@ from django.views.generic import ListView
 from forms import views
 from tasters.fields import MultipleCheckboxField
 from tasters.models import Date, Time
-from .validators import BookingUserValid
+from .validators import BookingUserValid, LoginUserValid
 from .widgets import CheckboxSelectMultipleWidget
+
 
 class SessionForm(forms.Form):
 
@@ -32,6 +33,24 @@ class SessionForm(forms.Form):
         Field('activity', css_class='checkbox input-xlarge'),
         FormActions(
             Submit('save_changes', 'Confirm booking', css_class="btn-success"),
+        )
+    )
+
+
+class LoginForm(forms.Form):
+
+    name = forms.CharField(
+        label='Kent Username / ID',
+        help_text='This will either be your Kent Username (eg. cks8), or your Kent ID (534624634) - whichever you signed up with.',
+        validators=[LoginUserValid]
+    )
+
+    helper = FormHelper()
+    helper.form_class = 'form-horizontal'
+    helper.layout = Layout(
+        Field('name', css_class='form-control input-xlarge'),
+        FormActions(
+            Submit('login', 'Login', css_class="btn-success"),
         )
     )
 

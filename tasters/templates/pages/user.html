@@ -1,0 +1,42 @@
+{% extends "noside.html" %}
+
+{% block content %}
+
+    <section>
+        <h3 class="bolder">Your Sessions</h3>
+
+        <br/>
+        <p class="padding-left">If you've booked into a session, details will be displayed here. If you're unable to make it, just click 'Unbook' next to the slot.</p>
+        <p class="padding-left">To rearrange, just unbook and rebook into the time you want.</p>
+        <br>
+
+        <div id="back">
+            <a href="/tasters">
+                {% include "partials/back.html" %}
+            </a>
+        </div>
+    </section>
+
+    {% for session in sessions %}
+        <section id="user-booking-details">
+            <div>
+                <i class="fa fa-2x fa-calendar-o"></i><span id="date">{{ session.date }}</span>
+
+                <i class="fa fa-2x fa-clock-o"></i><span id="time">{{ session.time }}</span>
+
+                {% if session.activity == 'S' %}
+                    <i class="fa fa-2x fa-anchor"></i><span id="activity">Sailing</span>
+                {% else %}
+                    <i class="fa fa-2x fa-paper-plane"></i><span id="activity">Windsurfing</span>
+                {% endif %}
+
+                <form>
+                    <button type="submit" class="btn btn-danger btn-lg">Unbook</button>
+                </form>
+            </div>
+
+        </section>
+    {% endfor %}
+
+
+{% endblock %}
