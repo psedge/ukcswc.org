@@ -55,6 +55,9 @@ class DateAdminForm(forms.ModelForm):
         help_text='Select the times we\'ll be able to run sessions'
     )
 
+    sailing_spots = forms.IntegerField(initial=6)
+    windsurfing_spots = forms.IntegerField(initial=6)
+
     def clean_times(self):
         return ', '.join(self.cleaned_data['times'])
 

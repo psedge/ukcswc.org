@@ -7,7 +7,6 @@ from django.utils.html import format_html
 
 
 class Time:
-
     choices = (
         ('10:00', '10:00'),
         ('10:30', '10:30'),
@@ -27,10 +26,9 @@ class Time:
 class Date(models.Model):
 
     date = models.DateField("Date")
-
-    times = models.CharField(
-        max_length=255
-    )
+    times = models.CharField(max_length=255)
+    sailing_spots = models.IntegerField(default=6)
+    windsurfing_spots = models.IntegerField(default=6)
 
     def get_spots(self):
         """
@@ -40,7 +38,7 @@ class Date(models.Model):
         """
         spots = []
         for time in self.times.split(', '):
-            spots.append(Spot(time=time, date=self))
+            spots.append(Spot(time=time, date=self, sailing_spots=self.sailing_spots, windsurfing_spots=self.windsurfing_spots))
         return spots
 
     def get_total_sessions(self):
@@ -72,18 +70,15 @@ class Date(models.Model):
 
 class Spot:
 
-    SAILING_PLACES = 6
-    WINDSURFING_PLACES = 6
-
-    def __init__(self, date, time):
+    def __init__(self, date, time, sailing_spots, windsurfing_spots):
         self.date = date
         self.time = time
 
         # Counts
-        self.places_sailing = self.SAILING_PLACES - UserSession.objects.all().filter(
+        self.places_sailing = sailing_spots - UserSession.objects.all().filter(
             date=self.date, time=self.time, activity='S'
         ).count()
-        self.places_windsurfing = self.WINDSURFING_PLACES - UserSession.objects.all().filter(
+        self.places_windsurfing = windsurfing_spots - UserSession.objects.all().filter(
             date=self.date, time=self.time, activity='W'
         ).count()
 

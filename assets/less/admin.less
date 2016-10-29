@@ -1,5 +1,36 @@
 @import "common";
 
+div#content-related {
+  background-color: transparent;
+
+  p {
+    display: inline-block;
+  }
+
+  div.module {
+    margin-top: 20px;
+    background-color: #f8f8f8;
+
+    div.row {
+      display: inline-block;
+      clear: both;
+      margin: 5px;
+      padding: 5px;
+
+      h2 {
+        float: left;
+      }
+
+      a {
+        border: 1px solid rgba(23, 56, 83, 0.96);
+        border-radius: 4px;
+        margin-top: 10px;
+        padding: 5px 20px;
+      }
+    }
+  }
+}
+
 th.column-passed, th.column-published{
   width: 50px;
 }
@@ -10,24 +41,6 @@ th.column-type, th.column-date {
 
 td.field-type {
   text-transform: capitalize;
-}
-
-div.row {
-  display: block;
-  clear: both;
-  margin: 5px;
-  padding: 5px;
-
-  h2 {
-    float: left;
-  }
-
-  a {
-    border: 1px solid rgba(23, 56, 83, 0.96);
-    border-radius: 4px;
-    margin-top: 10px;
-    padding: 5px 20px;
-  }
 }
 
 input#image-clear_id {
@@ -46,7 +59,7 @@ textarea {
   min-height: 400px;
 }
 
-label[for=id_content]:after {
+label[for=id_content]:after, label[for=id_text]:after {
   content: "Please format in Markdown." !important;
   position: relative;
   font-weight: normal;
