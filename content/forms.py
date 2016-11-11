@@ -5,7 +5,9 @@ from crispy_forms.bootstrap import FormActions
 from django.contrib.admin.widgets import AdminDateWidget
 from django_markdown.fields import *
 
+from content import fields
 from content.models import Event
+from content.widgets import MultipleImageInput
 
 
 class PageForm(forms.ModelForm):
@@ -25,8 +27,8 @@ class PageForm(forms.ModelForm):
         super(PageForm, self).__init__(*args, **kwargs)
 
     title = forms.CharField(max_length=100)
-    image = forms.FileField()
-    image.widget = forms.ClearableFileInput()
+    image = fields.MultipleImageField()
+    image.widget = MultipleImageInput()
     image.widget.clear_checkbox_label = 'Remove\n'
     help = Button(name="help-button", value="Content must be formatted in Markdown. For help, please click here")
     content = MarkdownFormField()
