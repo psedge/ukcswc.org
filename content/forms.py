@@ -6,8 +6,9 @@ from django.contrib.admin.widgets import AdminDateWidget
 from django_markdown.fields import *
 
 from content import fields
-from content.models import Event
+from content.models import Event, Photo
 from content.widgets import MultipleImageInput
+from tasters.fields import MultipleCheckboxField
 
 
 class PageForm(forms.ModelForm):
@@ -27,14 +28,45 @@ class PageForm(forms.ModelForm):
         super(PageForm, self).__init__(*args, **kwargs)
 
     title = forms.CharField(max_length=100)
-    image = fields.MultipleImageField()
-    image.widget = MultipleImageInput()
-    image.widget.clear_checkbox_label = 'Remove\n'
+
+    # image = MultipleCheckboxField(
+    #     choices={1:1, 2:2},
+    # )
     help = Button(name="help-button", value="Content must be formatted in Markdown. For help, please click here")
     content = MarkdownFormField()
 
     def save(self, commit=True):
         m = super(PageForm, self).save(commit=False)
+
+        if 'image-clear' in self.data and self.data['image-clear'] == 'on':
+            m.image = None
+            commit = True
+
+        if commit:
+            m.save()
+        return m
+
+
+class PhotoForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        self.helper = FormHelper()
+        self.helper.form_class = 'form-horizontal'
+        self.helper.layout = Layout(
+            Field('title', css_class='form-control input-xlarge'),
+            Field('image', css_class='form-control input-xlarge'),
+
+            FormActions(
+                Submit('Publish', 'Publish', css_class="btn-success"),
+            )
+        )
+        super(PhotoForm, self).__init__(*args, **kwargs)
+
+    title = forms.CharField(max_length=100)
+    image = fields.MultipleImageField()
+    image.widget = MultipleImageInput()
+
+    def save(self, commit=True):
+        m = super(PhotoForm, self).save(commit=False)
 
         if 'image-clear' in self.data and self.data['image-clear'] == 'on':
             m.image = None

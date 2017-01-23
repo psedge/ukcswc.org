@@ -1,7 +1,7 @@
 from django.contrib import admin
 
-from content.admin import PageAdmin, EventAdmin
-from content.models import Page, Event
+from content.admin import PageAdmin, EventAdmin, PhotoAdmin
+from content.models import Page, Event, Photo
 from tasters.models import *
 from tasters.admin import *
 from forms.models import *
@@ -29,5 +29,6 @@ admin_site.register(Feedback, FeedbackAdmin)
 admin_site.register(Announcement, AnnouncementAdmin)
 
 admin_site.register(Page, PageAdmin)
+admin_site.register(Photo, PhotoAdmin)
 admin_site.register(Event, EventAdmin)
 

@@ -86,6 +86,7 @@ class DateBookingView(FormView):
         try:
             session.validate_unique()
             session.save()
+            session.send_confirmation()
             messages.success(self.request, 'Thanks for booking! We\'ll send you a reminder the day before.')
             return redirect('/')
         except ValidationError:

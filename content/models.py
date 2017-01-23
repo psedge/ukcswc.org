@@ -20,6 +20,21 @@ class Page(models.Model):
         return self.title + " - " + self.content
 
 
+class Photo(models.Model):
+    view_only = False
+
+    class Meta:
+        verbose_name = 'Photo'
+        verbose_name_plural = 'Photos'
+
+    # Attributes
+    title = models.CharField(max_length=100)
+    image = models.CharField(max_length=512)
+
+    def __str__(self):
+        return self.title
+
+
 class Event(models.Model):
     view_only = False
 

@@ -1,5 +1,6 @@
 import datetime
 
+import requests
 from django import forms
 from django.db import models
 from django.forms import MultipleChoiceField
@@ -126,5 +127,32 @@ class UserSession(models.Model):
 
     def get_next_session(self):
         return self.objects.all().filter()
+
+    def send_confirmation(self):
+        try:
+            requests.post(
+                "https://api.mailgun.net/v3/ukcswc.org/messages",
+                auth=("api", "key-e24d6abeb59ebd1397dc77493f25efd2"),
+                data={"from": "UKCSWC <noreply@ukcswc.org>",
+                      "to": [self.user.email],
+                      "subject": self.activity + " session on " + self.date.to_human() + "!",
+                      "text": "Hi " + self.user.name + ",\n\n" +
+
+                      "Thanks for booking a session on " + self.date.to_human() + " at " + self.time +
+                      "Please arrive at least 15 minutes before the session begins.\n\n" +
+
+                      "At Whitstable Sailing Club, we have most of the kit you will need for your session, but " +
+                      "we do recommend you bring the following items: A towel, a change of clothes, and some change " +
+                      "for warm drinks or food.\n\n" +
+
+                      "You can find details about Whitstable Yacht Club on their website at http://wyc.org.uk, or " +
+                      "if you need further details about the session, please get in touch via our Facebook or " +
+                      "Twitter pages.\n\n" +
+
+                      "Thanks, UKCSWC.\n"
+                      })
+            return True
+        except Exception as e:
+            return False
 
 
